@@ -10,3 +10,7 @@ Este projeto tem como objetivos principais:
 
 - criação de um mecanismo "compilador" para a análise da árvore sintática gerada
   e posterior geração de comandos SQL e documentação;
+  
+
+Instruções para a compilação:
+
