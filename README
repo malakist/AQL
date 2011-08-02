@@ -1,0 +1,12 @@
+Projeto AQL - AdvPL Query Language
+
+Este projeto tem como objetivos principais:
+
+- especificar uma sintaxe, similar à sintaxe da linguagem AdvPL, para a escrita
+  de expressões representando queries abstratas;
+
+- criação de um analisador para a leitura dessas expressões e montagem de uma
+  árvore sintática.
+
+- criação de um mecanismo "compilador" para a análise da árvore sintática gerada
+  e posterior geração de comandos SQL e documentação;
