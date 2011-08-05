@@ -1,0 +1,1 @@
+gcc lex.yy.c y.tab.c -oaql_parser.exe
