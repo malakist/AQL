@@ -9,13 +9,13 @@
 
 	/* Identificadores */
 	
-[a-zA-Z]+			{
+[a-zA-Z0-9]+			{
 					yylval = yytext;
 					return IDENTIFIER;
 				}
 	/* operadores */
 
-[-+()=/*\n]		{ return *yytext; }
+[\->+()=/*\n]		{ return *yytext; }
 
 
 

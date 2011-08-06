@@ -39,17 +39,62 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IDENTIFIER = 258
+     IDENTIFIER = 258,
+     LITERAL = 259,
+     MEMBER_PTR = 260,
+     EQ = 261,
+     NE = 262,
+     GT = 263,
+     LT = 264,
+     GE = 265,
+     LE = 266,
+     NOT = 267,
+     AND = 268,
+     OR = 269,
+     FROM_BEGIN = 270,
+     WHERE_BEGIN = 271,
+     SELECT_BEGIN = 272,
+     Q_BEGIN = 273,
+     Q_END = 274
    };
 #endif
 /* Tokens.  */
 #define IDENTIFIER 258
+#define LITERAL 259
+#define MEMBER_PTR 260
+#define EQ 261
+#define NE 262
+#define GT 263
+#define LT 264
+#define GE 265
+#define LE 266
+#define NOT 267
+#define AND 268
+#define OR 269
+#define FROM_BEGIN 270
+#define WHERE_BEGIN 271
+#define SELECT_BEGIN 272
+#define Q_BEGIN 273
+#define Q_END 274
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+{
+
+/* Line 1676 of yacc.c  */
+#line 9 "aql.bison"
+
+	char * idName;
+	char * litValue;
+
+
+
+/* Line 1676 of yacc.c  */
+#line 97 "y.tab.h"
+} YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -12,10 +12,19 @@
 
 %%
 
-column_id:
-			IDENTIFIER					{ printf("Identificador encontrado: %s\n", $1); }
+input:
+			| input line
 			;
-				
+			
+line:		'\n'
+			| column_id '\n'					{ printf("Identificador + pulada de linha\n\n"); }
+
+column_id:	identifier '->' identifier			{ printf("Identificador encontrado: \"%s\"->\"%s\"\n", $1, $3); }
+			;
+
+identifier: IDENTIFIER							{ $$ = $1; }
+			'(' IDENTIFIER ')'					{ $$ = $2; }
+			
 %%
 
 int yywrap(void) {

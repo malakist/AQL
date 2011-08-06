@@ -1,30 +1,71 @@
 %{
 	#include <stdlib.h>
 	#include <stdio.h>
-
-	#define YYSTYPE char const *
 	
 	int yylex(void);
-	void yyerror(const char *);
+	void yyerror(char const *);
 %}
 
-%token IDENTIFIER
+%union {
+	char * idName;
+	char * litValue;
+}
+
+%token <idName> IDENTIFIER
+%token <litValue> LITERAL
+%token MEMBER_PTR
+%token EQ NE GT LT GE LE
+%token NOT AND OR
+%token FROM_BEGIN WHERE_BEGIN SELECT_BEGIN
+%token Q_BEGIN Q_END
 
 %%
 
-input:
-			| input line
-			;
-			
-line:		'\n'
-			| column_id '\n'					{ printf("Identificador + pulada de linha\n\n"); }
+query:				Q_BEGIN from_clause where_clause select_clause Q_END
+						{ printf("Query analizada com sucesso\n\n"); exit(0); }
+					;
 
-column_id:	identifier '->' identifier			{ printf("Identificador encontrado: \"%s\"->\"%s\"\n", $1, $3); }
-			;
+from_clause:		FROM_BEGIN table_list
+					;
+					
+table_list:			table_identifier
+					| table_list ',' table_identifier
+					;
 
-identifier: IDENTIFIER							{ $$ = $1; }
-			'(' IDENTIFIER ')'					{ $$ = $2; }
-			
+table_identifier: 	IDENTIFIER
+					;
+					
+where_clause:		WHERE_BEGIN predicate_list
+					;
+					
+predicate_list:		predicate
+					| predicate_list AND predicate
+					| predicate_list OR predicate
+					;
+					
+predicate:			expression
+					| expression EQ expression
+					| expression NE expression
+					| expression GT expression
+					| expression LT expression
+					| expression GE expression
+					| expression LE expression
+					| NOT predicate
+					;
+
+select_clause:		SELECT_BEGIN member_list
+					;
+
+member_list:		expression
+					| member_list ',' expression
+					;
+				
+expression:			IDENTIFIER
+					| IDENTIFIER MEMBER_PTR IDENTIFIER
+					| IDENTIFIER '(' expression ')'
+					| LITERAL
+					;
+
 %%
 
 int yywrap(void) {
