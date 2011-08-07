@@ -23,6 +23,7 @@
 
 query:				Q_BEGIN from_clause where_clause select_clause Q_END
 						{ printf("Query analizada com sucesso\n\n"); exit(0); }
+					| Q_BEGIN from_clause select_clause Q_END
 					;
 
 from_clause:		FROM_BEGIN table_list
@@ -53,7 +54,8 @@ predicate:			expression
 					| NOT predicate
 					;
 
-select_clause:		SELECT_BEGIN member_list
+select_clause:		SELECT_BEGIN
+					| SELECT_BEGIN member_list
 					;
 
 member_list:		expression

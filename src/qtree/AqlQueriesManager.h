@@ -6,15 +6,16 @@
 
 using namespace std;
 
-class AqlQueriesManager : AqlNode {
+class AqlQueriesManager {
 private:
 	list<AqlNode> * queryList;
 	
 	AqlQueriesManager(AqlQueriesManager&);
-	virtual AqlQueriesManager& operator=(const AqlQueriesManager& rhs) = 0;	
+	AqlQueriesManager& operator=(const AqlQueriesManager& rhs);	
 	list<AqlNode> * GetInternalQueryList();
 public:
-	AqlQueriesManager(const AqlNode * aqlQuery);	
+	AqlQueriesManager();
+	void IncludeQuery(const AqlNode * mainNode);
 };
 
 #endif

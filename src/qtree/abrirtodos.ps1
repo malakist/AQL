@@ -1,0 +1,1 @@
+gci . | where { $_.name -match ".*\.(h|cpp)" } | foreach { notepad++ $_.Name }

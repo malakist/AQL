@@ -1,0 +1,516 @@
+Grammar
+
+    0 $accept: query $end
+
+    1 query: Q_BEGIN from_clause where_clause select_clause Q_END
+
+    2 from_clause: FROM_BEGIN table_list
+
+    3 table_list: table_identifier
+    4           | table_list ',' table_identifier
+
+    5 table_identifier: IDENTIFIER
+
+    6 where_clause: WHERE_BEGIN predicate_list
+
+    7 predicate_list: predicate
+    8               | predicate_list AND predicate
+    9               | predicate_list OR predicate
+
+   10 predicate: expression
+   11          | expression EQ expression
+   12          | expression NE expression
+   13          | expression GT expression
+   14          | expression LT expression
+   15          | expression GE expression
+   16          | expression LE expression
+   17          | NOT predicate
+
+   18 select_clause: SELECT_BEGIN member_list
+
+   19 member_list: expression
+   20            | member_list ',' expression
+
+   21 expression: IDENTIFIER
+   22           | IDENTIFIER MEMBER_PTR IDENTIFIER
+   23           | IDENTIFIER '(' expression ')'
+   24           | LITERAL
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 23
+')' (41) 23
+',' (44) 4 20
+error (256)
+IDENTIFIER (258) 5 21 22 23
+LITERAL (259) 24
+MEMBER_PTR (260) 22
+EQ (261) 11
+NE (262) 12
+GT (263) 13
+LT (264) 14
+GE (265) 15
+LE (266) 16
+NOT (267) 17
+AND (268) 8
+OR (269) 9
+FROM_BEGIN (270) 2
+WHERE_BEGIN (271) 6
+SELECT_BEGIN (272) 18
+Q_BEGIN (273) 1
+Q_END (274) 1
+
+
+Nonterminals, with rules where they appear
+
+$accept (23)
+    on left: 0
+query (24)
+    on left: 1, on right: 0
+from_clause (25)
+    on left: 2, on right: 1
+table_list (26)
+    on left: 3 4, on right: 2 4
+table_identifier (27)
+    on left: 5, on right: 3 4
+where_clause (28)
+    on left: 6, on right: 1
+predicate_list (29)
+    on left: 7 8 9, on right: 6 8 9
+predicate (30)
+    on left: 10 11 12 13 14 15 16 17, on right: 7 8 9 17
+select_clause (31)
+    on left: 18, on right: 1
+member_list (32)
+    on left: 19 20, on right: 18 20
+expression (33)
+    on left: 21 22 23 24, on right: 10 11 12 13 14 15 16 19 20 23
+
+
+state 0
+
+    0 $accept: . query $end
+
+    Q_BEGIN  shift, and go to state 1
+
+    query  go to state 2
+
+
+state 1
+
+    1 query: Q_BEGIN . from_clause where_clause select_clause Q_END
+
+    FROM_BEGIN  shift, and go to state 3
+
+    from_clause  go to state 4
+
+
+state 2
+
+    0 $accept: query . $end
+
+    $end  shift, and go to state 5
+
+
+state 3
+
+    2 from_clause: FROM_BEGIN . table_list
+
+    IDENTIFIER  shift, and go to state 6
+
+    table_list        go to state 7
+    table_identifier  go to state 8
+
+
+state 4
+
+    1 query: Q_BEGIN from_clause . where_clause select_clause Q_END
+
+    WHERE_BEGIN  shift, and go to state 9
+
+    where_clause  go to state 10
+
+
+state 5
+
+    0 $accept: query $end .
+
+    $default  accept
+
+
+state 6
+
+    5 table_identifier: IDENTIFIER .
+
+    $default  reduce using rule 5 (table_identifier)
+
+
+state 7
+
+    2 from_clause: FROM_BEGIN table_list .
+    4 table_list: table_list . ',' table_identifier
+
+    ','  shift, and go to state 11
+
+    $default  reduce using rule 2 (from_clause)
+
+
+state 8
+
+    3 table_list: table_identifier .
+
+    $default  reduce using rule 3 (table_list)
+
+
+state 9
+
+    6 where_clause: WHERE_BEGIN . predicate_list
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+    NOT         shift, and go to state 14
+
+    predicate_list  go to state 15
+    predicate       go to state 16
+    expression      go to state 17
+
+
+state 10
+
+    1 query: Q_BEGIN from_clause where_clause . select_clause Q_END
+
+    SELECT_BEGIN  shift, and go to state 18
+
+    select_clause  go to state 19
+
+
+state 11
+
+    4 table_list: table_list ',' . table_identifier
+
+    IDENTIFIER  shift, and go to state 6
+
+    table_identifier  go to state 20
+
+
+state 12
+
+   21 expression: IDENTIFIER .
+   22           | IDENTIFIER . MEMBER_PTR IDENTIFIER
+   23           | IDENTIFIER . '(' expression ')'
+
+    MEMBER_PTR  shift, and go to state 21
+    '('         shift, and go to state 22
+
+    $default  reduce using rule 21 (expression)
+
+
+state 13
+
+   24 expression: LITERAL .
+
+    $default  reduce using rule 24 (expression)
+
+
+state 14
+
+   17 predicate: NOT . predicate
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+    NOT         shift, and go to state 14
+
+    predicate   go to state 23
+    expression  go to state 17
+
+
+state 15
+
+    6 where_clause: WHERE_BEGIN predicate_list .
+    8 predicate_list: predicate_list . AND predicate
+    9               | predicate_list . OR predicate
+
+    AND  shift, and go to state 24
+    OR   shift, and go to state 25
+
+    $default  reduce using rule 6 (where_clause)
+
+
+state 16
+
+    7 predicate_list: predicate .
+
+    $default  reduce using rule 7 (predicate_list)
+
+
+state 17
+
+   10 predicate: expression .
+   11          | expression . EQ expression
+   12          | expression . NE expression
+   13          | expression . GT expression
+   14          | expression . LT expression
+   15          | expression . GE expression
+   16          | expression . LE expression
+
+    EQ  shift, and go to state 26
+    NE  shift, and go to state 27
+    GT  shift, and go to state 28
+    LT  shift, and go to state 29
+    GE  shift, and go to state 30
+    LE  shift, and go to state 31
+
+    $default  reduce using rule 10 (predicate)
+
+
+state 18
+
+   18 select_clause: SELECT_BEGIN . member_list
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    member_list  go to state 32
+    expression   go to state 33
+
+
+state 19
+
+    1 query: Q_BEGIN from_clause where_clause select_clause . Q_END
+
+    Q_END  shift, and go to state 34
+
+
+state 20
+
+    4 table_list: table_list ',' table_identifier .
+
+    $default  reduce using rule 4 (table_list)
+
+
+state 21
+
+   22 expression: IDENTIFIER MEMBER_PTR . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 35
+
+
+state 22
+
+   23 expression: IDENTIFIER '(' . expression ')'
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 36
+
+
+state 23
+
+   17 predicate: NOT predicate .
+
+    $default  reduce using rule 17 (predicate)
+
+
+state 24
+
+    8 predicate_list: predicate_list AND . predicate
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+    NOT         shift, and go to state 14
+
+    predicate   go to state 37
+    expression  go to state 17
+
+
+state 25
+
+    9 predicate_list: predicate_list OR . predicate
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+    NOT         shift, and go to state 14
+
+    predicate   go to state 38
+    expression  go to state 17
+
+
+state 26
+
+   11 predicate: expression EQ . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 39
+
+
+state 27
+
+   12 predicate: expression NE . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 40
+
+
+state 28
+
+   13 predicate: expression GT . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 41
+
+
+state 29
+
+   14 predicate: expression LT . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 42
+
+
+state 30
+
+   15 predicate: expression GE . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 43
+
+
+state 31
+
+   16 predicate: expression LE . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 44
+
+
+state 32
+
+   18 select_clause: SELECT_BEGIN member_list .
+   20 member_list: member_list . ',' expression
+
+    ','  shift, and go to state 45
+
+    $default  reduce using rule 18 (select_clause)
+
+
+state 33
+
+   19 member_list: expression .
+
+    $default  reduce using rule 19 (member_list)
+
+
+state 34
+
+    1 query: Q_BEGIN from_clause where_clause select_clause Q_END .
+
+    $default  reduce using rule 1 (query)
+
+
+state 35
+
+   22 expression: IDENTIFIER MEMBER_PTR IDENTIFIER .
+
+    $default  reduce using rule 22 (expression)
+
+
+state 36
+
+   23 expression: IDENTIFIER '(' expression . ')'
+
+    ')'  shift, and go to state 46
+
+
+state 37
+
+    8 predicate_list: predicate_list AND predicate .
+
+    $default  reduce using rule 8 (predicate_list)
+
+
+state 38
+
+    9 predicate_list: predicate_list OR predicate .
+
+    $default  reduce using rule 9 (predicate_list)
+
+
+state 39
+
+   11 predicate: expression EQ expression .
+
+    $default  reduce using rule 11 (predicate)
+
+
+state 40
+
+   12 predicate: expression NE expression .
+
+    $default  reduce using rule 12 (predicate)
+
+
+state 41
+
+   13 predicate: expression GT expression .
+
+    $default  reduce using rule 13 (predicate)
+
+
+state 42
+
+   14 predicate: expression LT expression .
+
+    $default  reduce using rule 14 (predicate)
+
+
+state 43
+
+   15 predicate: expression GE expression .
+
+    $default  reduce using rule 15 (predicate)
+
+
+state 44
+
+   16 predicate: expression LE expression .
+
+    $default  reduce using rule 16 (predicate)
+
+
+state 45
+
+   20 member_list: member_list ',' . expression
+
+    IDENTIFIER  shift, and go to state 12
+    LITERAL     shift, and go to state 13
+
+    expression  go to state 47
+
+
+state 46
+
+   23 expression: IDENTIFIER '(' expression ')' .
+
+    $default  reduce using rule 23 (expression)
+
+
+state 47
+
+   20 member_list: member_list ',' expression .
+
+    $default  reduce using rule 20 (member_list)

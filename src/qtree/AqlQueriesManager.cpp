@@ -7,10 +7,18 @@ list<AqlNode> * AqlQueriesManager::GetInternalQueryList() {
 	return this->queryList;
 }
 
+AqlQueriesManager& AqlQueriesManager::operator=(const AqlQueriesManager& rhs) {
+	return *this;
+}
+
 AqlQueriesManager::AqlQueriesManager(AqlQueriesManager& rhs) {
 	
 }
 
-AqlQueriesManager::AqlQueriesManager(const AqlNode * aqlQuery) {
-	this->GetInternalQueryList()->push_back(*aqlQuery);
+AqlQueriesManager::AqlQueriesManager() {
+	//this->GetInternalQueryList()->push_back(*aqlQuery);
+}
+
+void AqlQueriesManager::IncludeQuery(const AqlNode * mainNode) {
+	this->GetInternalQueryList()->push_back(*mainNode);
 }

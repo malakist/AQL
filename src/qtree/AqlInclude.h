@@ -1,11 +1,10 @@
-typedef enum {
-	equals, notEquals, GreaterThan, LessThan, GreaterEquals, LessEquals
-} logicalOperatorType;
+#ifndef AQLINCLUDE_H
+#define AQLINCLUDE_H
 
 typedef enum {
-	operatorNot, operatorAnd, operatorOr
-} logicalConectorType;
+	Equals, NotEquals, GreaterThan, LessThan, GreaterEquals, LessEquals, 
+	OperatorNot, OperatorAnd, OperatorOr, TableDeclaration, ColumnDeclaration,
+	ConstantValue, Expression
+} aqlNodeType;
 
-typedef enum {
-	logicalOperator, logicalConector, clauseDeclarator
-} nodeType;
+#endif

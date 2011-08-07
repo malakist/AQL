@@ -6,7 +6,7 @@
 
 class AqlSemanticCheckVisitor : public AqlNodeVisitor {
 public:
-	virtual void PerformOperation(const AqlNode * node);
+	void PerformOperation(const AqlNode * node) const;
 };
 
 #endif

@@ -4,6 +4,6 @@
 
 using namespace std;
 
-void AqlSemanticCheckVisitor::PerformOperation(const AqlNode * node) {
-	cout << "Estou fazendo uma analise Semantica";
+void AqlSemanticCheckVisitor::PerformOperation(const AqlNode * node) const {
+	cout << "Estou fazendo uma analise Semantica" << endl;
 }
