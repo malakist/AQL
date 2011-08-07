@@ -23,12 +23,14 @@ int main (void) {
 	//childNode1 = new AqlNode;
 	//childNode2 = new AqlNode;
 	
-	AqlQueriesManager * mgr = new AqlQueriesManager();
-	mgr->IncludeQuery(node);
+	// AqlQueriesManager * mgr = new AqlQueriesManager();
+	// mgr->IncludeQuery(node);
 	
 	cout << "Objeto criado" << endl;
 	
 	cout << "Quantidade de nodes filhos existente: " << node->GetChildCount() << endl;
+	
+	delete node;
 	
 	return 0;
 }

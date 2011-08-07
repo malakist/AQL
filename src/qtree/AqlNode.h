@@ -18,7 +18,7 @@ public:
 	AqlNode& operator=(AqlNode& rhs);
 	void AddChildNode(AqlNode * node);
 	AqlNode * GetNodeAtPosition(const short position);
-	std::size_t GetChildCount(void);
+	int GetChildCount(void);
 };
 
 #endif

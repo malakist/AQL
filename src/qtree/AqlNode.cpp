@@ -34,6 +34,6 @@ AqlNode * AqlNode::GetNodeAtPosition(const short position) {
 	}
 }
 
-size_t AqlNode::GetChildCount(void) {
+int AqlNode::GetChildCount(void) {
 	(this->GetInternalVector())->size();
 }
