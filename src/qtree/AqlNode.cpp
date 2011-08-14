@@ -26,7 +26,7 @@ AqlNode& AqlNode::operator=(AqlNode& rhs) {
 }
 
 AqlNode * AqlNode::GetNodeAtPosition(const short position) {
-	return (AqlNode*) 0;
+	return this->childNodes[position];
 }
 
 int AqlNode::GetChildCount(void) {
