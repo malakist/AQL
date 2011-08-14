@@ -31,16 +31,24 @@
 					cpyLitValue = (char *) malloc(sizeof(yytext));
 					strcpy(cpyLitValue, yytext);
 					yylval.litValue = cpyLitValue;
-					return LITERAL;
+					return INTEGER;
 				}
 
-[\"][0-9]*[\"]			{
+[0-9]*\.[0-9]+			{
+					char * cpyLitValue;
+					cpyLitValue = (char *) malloc(yyleng);
+					strcpy(cpyLitValue, yytext);
+					yylval.litValue = cpyLitValue;
+					return FLOAT;
+				}
+
+[\"][0-9A-Za-z]*[\"]		{
 					char * cpyLitValue;
 					int length = strlen(yytext);
 					cpyLitValue = (char *) malloc(sizeof(yytext) - 2);
 					strncpy(cpyLitValue, yytext+1, length);
 					yylval.litValue = cpyLitValue;
-					return LITERAL;
+					return STRING;
 				}
 
 "->"				return MEMBER_PTR;
@@ -61,3 +69,6 @@
 
 
 . 				{ printf("Caracter desconhecido"); }
+
+%% 
+

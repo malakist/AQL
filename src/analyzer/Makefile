@@ -15,7 +15,7 @@ CC=g++
 all: clean parser
 
 parser: flex_output
-	$(CC) $(FLEX_OBJ) $(BISON_OBJ) -o $(PARSER_EXE)
+	$(CC) $(FLEX_OBJ) $(BISON_OBJ) main.cpp -o $(PARSER_EXE)
 	
 bison_output: aql.bison
 	$(BISON_EXE) $(BISON_INPUT) $(BISON_ARGS)
@@ -24,8 +24,6 @@ bison_output: aql.bison
 flex_output: bison_output aql.flex
 	$(FLEX_EXE) $(FLEX_ARGS) $(FLEX_INPUT)
 	$(CC) $(FLEX_OUTPUT) -c
-	del $(FLEX_OUTPUT)
-	del $(BISON_OUTPUT)
 
 clean:
 	del *.o

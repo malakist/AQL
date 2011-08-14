@@ -1,6 +1,8 @@
 %{
 	#include <stdlib.h>
 	#include <stdio.h>
+	#include "..\qtree\AqlInclude.h"
+	#include "..\qtree\AqlNode.h"
 	
 	int yylex(void);
 	void yyerror(char const *);
@@ -12,7 +14,9 @@
 }
 
 %token <idName> IDENTIFIER
-%token <litValue> LITERAL
+%token <litValue> INTEGER
+%token <litValue> FLOAT
+%token <litValue> STRING
 %token MEMBER_PTR
 %token EQ NE GT LT GE LE
 %token NOT AND OR
@@ -65,15 +69,12 @@ member_list:		expression
 expression:			IDENTIFIER
 					| IDENTIFIER MEMBER_PTR IDENTIFIER
 					| IDENTIFIER '(' expression ')'
-					| LITERAL
+					| INTEGER
+					| FLOAT
+					| STRING
 					;
 
 %%
-
-int main(void) {
-	yyparse();
-	return 0;
-}
 
 void yyerror(const char *s) {
 	fprintf(stderr, "%s\n", s);
