@@ -5,20 +5,23 @@
 #include <vector>
 #include "AqlInclude.h"
 
+namespace AQL {
+
+
+
 class AqlNode {
 private:
-	static const short maxChildCount = 100;
-	std::vector<AqlNode*> * childNodes;
-	std::vector<AqlNode*> * GetInternalVector();
-	
-public:	
-	aqlNodeType NodeType;
-	
-	AqlNode();
+	typedef std::vector<AqlNode*> AqlNodeList;
+
+	int childCount;
+	AqlNodeList *childNodes;
+	AqlNodeType nodeType;
+public:			
+	explicit AqlNode(AqlNodeType, int, ...);
 	AqlNode& operator=(AqlNode& rhs);
-	void AddChildNode(AqlNode * node);
 	AqlNode * GetNodeAtPosition(const short position);
 	int GetChildCount(void);
 };
 
+} 
 #endif

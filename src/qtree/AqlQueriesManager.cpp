@@ -1,5 +1,7 @@
 #include "AqlQueriesManager.h"
 
+namespace AQL {
+
 list<AqlNode> * AqlQueriesManager::GetInternalQueryList() {
 	if (!this->queryList) {
 		this->queryList = new list<AqlNode>;
@@ -22,3 +24,5 @@ AqlQueriesManager::AqlQueriesManager() {
 void AqlQueriesManager::IncludeQuery(const AqlNode * mainNode) {
 	this->GetInternalQueryList()->push_back(*mainNode);
 }
+
+} // namespace

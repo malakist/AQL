@@ -1,39 +1,36 @@
 #include <string>
+#include <cstdarg>
 #include "AqlNode.h"
+#include "AqlInclude.h"
 
 using namespace std;
 
-AqlNode::AqlNode() {
-	this->childNodes = (vector<AqlNode*> *) 0;
-}
+namespace AQL {
 
-std::vector<AqlNode*> * AqlNode::GetInternalVector(void) {
-	if (!childNodes) 
-		childNodes = new std::vector<AqlNode *>;	
+AqlNode::AqlNode(AqlNodeType nodeType, int childCount, ...) {
+	va_list ap;
+	int i;
 	
-	return childNodes;
+	this->nodeType = nodeType;
+	this->childCount = childCount;
+	this->childNodes = new AqlNodeList;
+	
+	va_start(ap, childCount);
+	for (i = 0; i < childCount; i++)
+		this->childNodes->push_back(va_arg(ap, AqlNode*));
+	va_end(ap);
 }
 
 AqlNode& AqlNode::operator=(AqlNode& rhs) {
 	return *this;
 }
 
-void AqlNode::AddChildNode(AqlNode * node) {
-	if (this->GetInternalVector()->size() < AqlNode::maxChildCount) {
-		this->GetInternalVector()->push_back(node);
-	} else {
-		//throw exception;
-	}
-}
-
 AqlNode * AqlNode::GetNodeAtPosition(const short position) {
-	if (position < this->GetChildCount()) {
-		return (AqlNode *) (*(this->GetInternalVector()))[position];
-	} else {
-		return (AqlNode *) 0;
-	}
+	return (AqlNode*) 0;
 }
 
 int AqlNode::GetChildCount(void) {
-	(this->GetInternalVector())->size();
+	return this->childCount;
 }
+
+} // namespace

@@ -6,6 +6,8 @@
 
 using namespace std;
 
+namespace AQL {
+
 class AqlQueriesManager {
 private:
 	list<AqlNode> * queryList;
@@ -17,5 +19,6 @@ public:
 	AqlQueriesManager();
 	void IncludeQuery(const AqlNode * mainNode);
 };
+}
 
 #endif
