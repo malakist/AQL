@@ -1,24 +1,37 @@
 FLEX_EXE=c:\gnuwin32\bin\flex.exe
-BISON_EXE=c:\gnuwin32\bin\bison.exe
-OUTPUT_SOURCES=lex.yy.c y.tab.c
 FLEX_INPUT=aql.flex
+FLEX_OUTPUT=lex.yy.c
+FLEX_OBJ=lex.yy.o
+FLEX_ARGS=
+BISON_EXE=c:\gnuwin32\bin\bison.exe
 BISON_INPUT=aql.bison
 BISON_ARGS=-y -d -v
+BISON_OUTPUT=y.tab.c y.tab.h
+BISON_OBJ=y.tab.o
+AUTO_SOURCES=lex.yy.c y.tab.c y.tab.h
+PARSER_EXE=aql_parser.exe
+CC=g++
 
 all: clean parser
 
 parser: flex_output
-	gcc $(OUTPUT_SOURCES) -oaql_parser.exe
+	$(CC) $(FLEX_OBJ) $(BISON_OBJ) -o $(PARSER_EXE)
 	
 bison_output: aql.bison
 	$(BISON_EXE) $(BISON_INPUT) $(BISON_ARGS)
+	$(CC) $(BISON_OUTPUT) -c
 	
-flex_output: bison_output y.tab.c y.tab.h
-	$(FLEX_EXE) $(FLEX_INPUT)
+flex_output: bison_output aql.flex
+	$(FLEX_EXE) $(FLEX_ARGS) $(FLEX_INPUT)
+	$(CC) $(FLEX_OUTPUT) -c
+	del $(FLEX_OUTPUT)
+	del $(BISON_OUTPUT)
 
 clean:
 	del *.o
 	del *.exe
+	del *.gch
 	del lex.yy.c
+	del lex.yy.cc
 	del y.tab.c
 	del y.tab.h

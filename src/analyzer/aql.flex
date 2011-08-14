@@ -1,3 +1,5 @@
+%option noyywrap
+
 %{
 	#include <stdlib.h>
 	#include <stdio.h>
@@ -18,7 +20,7 @@
 
 [a-zA-Z][a-zA-Z0-9]*		{
 					char * cpyIdName;
-					cpyIdName = malloc(sizeof(yytext));
+					cpyIdName = (char *) malloc(sizeof(yytext));
 					strcpy(cpyIdName, yytext);
 					yylval.idName = cpyIdName;
 					return IDENTIFIER;
@@ -26,7 +28,7 @@
 
 [0-9]+				{
 					char * cpyLitValue;
-					cpyLitValue = malloc(sizeof(yytext));
+					cpyLitValue = (char *) malloc(sizeof(yytext));
 					strcpy(cpyLitValue, yytext);
 					yylval.litValue = cpyLitValue;
 					return LITERAL;
@@ -35,7 +37,7 @@
 [\"][0-9]*[\"]			{
 					char * cpyLitValue;
 					int length = strlen(yytext);
-					cpyLitValue = malloc(sizeof(yytext) - 2);
+					cpyLitValue = (char *) malloc(sizeof(yytext) - 2);
 					strncpy(cpyLitValue, yytext+1, length);
 					yylval.litValue = cpyLitValue;
 					return LITERAL;
