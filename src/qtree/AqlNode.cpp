@@ -13,7 +13,7 @@ AqlNode::AqlNode(AqlNodeType nodeType, int childCount, ...) {
 	
 	this->nodeType = nodeType;
 	this->childCount = childCount;
-	this->childNodes = new AqlNodeList;
+	this->childNodes = new std::vector<AqlNode*>;
 	
 	va_start(ap, childCount);
 	for (i = 0; i < childCount; i++)
@@ -25,12 +25,16 @@ AqlNode& AqlNode::operator=(AqlNode& rhs) {
 	return *this;
 }
 
-AqlNode * AqlNode::GetNodeAtPosition(const short position) {
-	return this->childNodes[position];
+AqlNode * AqlNode::GetNodeAtPosition(const int position) {
+	return (*(this->childNodes))[position];
 }
 
 int AqlNode::GetChildCount(void) {
 	return this->childCount;
+}
+
+AqlNode * AqlNode::CreateDefaultNode(void) {
+	return (AqlNode *) 0;
 }
 
 } // namespace

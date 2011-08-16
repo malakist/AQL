@@ -1,9 +1,13 @@
 %option noyywrap
 
 %{
+
 	#include <stdlib.h>
 	#include <stdio.h>
 	#include <string.h>
+	#include <iostream>
+	#include "..\qtree\AqlInclude.h"
+	#include "..\qtree\AqlNode.h"
 	#include "y.tab.h"
 %}
 
@@ -18,7 +22,7 @@
 "Where"				return WHERE_BEGIN;
 "Select"			return SELECT_BEGIN;
 
-[a-zA-Z][a-zA-Z0-9]*		{
+[a-zA-Z][_a-zA-Z0-9]*		{
 					char * cpyIdName;
 					cpyIdName = (char *) malloc(sizeof(yytext));
 					strcpy(cpyIdName, yytext);
@@ -72,3 +76,26 @@
 
 %% 
 
+extern int yyparse (void);
+
+int main(int argc, char **argv) {
+	argc--, argv++;
+	
+	std::cout << "Iniciando o compilador\n";
+	
+	if (argc > 0)  
+	{
+		std::cout << "Compilando via arquivo...\n";
+		yyin = fopen(argv[0], "r"); 
+	} 
+	else 
+	{
+		std::cout << "Compilando via STDIN...\n";
+		yyin = stdin;
+	}
+		
+	yyparse();
+	
+	std::cout << "Compilacao encerrada\n\n"; 
+	return 0;
+}

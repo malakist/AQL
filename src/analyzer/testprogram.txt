@@ -1,5 +1,5 @@
 Begin Query 
 	From SZ2
-	Where SZ2->Z2_Nome = "Camila"
-	Select SZ2->Z2_Nome
+	Where Z2->Z2_Nome == "Camila"
+	Select SZ2
 End Query

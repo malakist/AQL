@@ -7,20 +7,17 @@
 
 namespace AQL {
 
-
-
 class AqlNode {
 private:
-	typedef std::vector<AqlNode*> AqlNodeList;
-
 	int childCount;
-	AqlNodeList *childNodes;
+	std::vector<AqlNode*> *childNodes;
 	AqlNodeType nodeType;
 public:			
 	explicit AqlNode(AqlNodeType, int, ...);
 	AqlNode& operator=(AqlNode& rhs);
-	AqlNode * GetNodeAtPosition(const short position);
+	AqlNode * GetNodeAtPosition(const int position);
 	int GetChildCount(void);
+	static AqlNode* CreateDefaultNode(void);
 };
 
 } 
