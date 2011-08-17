@@ -5,7 +5,8 @@ FLEX_OBJ=lex.yy.o
 FLEX_ARGS=
 BISON_EXE=c:\gnuwin32\bin\bison.exe
 BISON_INPUT=aql.bison
-BISON_ARGS=-y -d -v
+#BISON_ARGS=-y -d -v
+BISON_ARGS=-d
 BISON_OUTPUT=y.tab.c y.tab.h
 BISON_OBJ=y.tab.o
 AUTO_SOURCES=lex.yy.c y.tab.c y.tab.h
@@ -27,7 +28,7 @@ clean:
 	del *.o
 	del *.exe
 	del *.gch
-	del lex.yy.c
-	del lex.yy.cc
-	del y.tab.c
-	del y.tab.h
+	del *.output
+	del *.hh
+	del lex.yy.*
+	del y.tab.*

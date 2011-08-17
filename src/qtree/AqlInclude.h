@@ -9,5 +9,6 @@ typedef enum {
 	ConstantValue, Expression
 } AqlNodeType;
 
-}
+};
+
 #endif 

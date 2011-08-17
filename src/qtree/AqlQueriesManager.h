@@ -4,8 +4,6 @@
 #include <list>
 #include "AqlNode.h"
 
-using namespace std;
-
 namespace AQL {
 
 class AqlQueriesManager {
@@ -14,7 +12,7 @@ private:
 	
 	AqlQueriesManager(AqlQueriesManager&);
 	AqlQueriesManager& operator=(const AqlQueriesManager& rhs);	
-	list<AqlNode> * GetInternalQueryList();
+	std::list<AqlNode> * GetInternalQueryList();
 public:
 	AqlQueriesManager();
 	void IncludeQuery(const AqlNode * mainNode);

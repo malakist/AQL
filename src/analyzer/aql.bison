@@ -1,20 +1,28 @@
-%{
+%skeleton "lalr1.cc"
+%require "2.4.1"
+%defines
+%define namespace "AQL"
+%define parser_class_name "Parser"
+
+%code requires{
 	#include <stdlib.h>
 	#include <stdio.h>
 	#include "..\qtree\AqlInclude.h"
 	#include "..\qtree\AqlNode.h"
 	
+	typedef struct {
+		int nodeId;
+	} treeNode;
+
 	int yylex(void);
 	void yyerror(char const *);
-%}
-
-%union {
-	char * idName;
-	char * litValue;
-	AQL::AqlNode * nodePointer;
 }
 
-%type <nodePointer> expression;
+%union {
+	char *litValue;
+	char *idName;
+	//treeNode *nodePointer;
+}
 
 %token <idName> IDENTIFIER
 %token <litValue> INTEGER FLOAT STRING
@@ -23,6 +31,8 @@
 %token NOT AND OR
 %token FROM_BEGIN WHERE_BEGIN SELECT_BEGIN
 %token Q_BEGIN Q_END
+
+%type <nodePointer> expression
 
 %%
 
@@ -67,15 +77,16 @@ member_list:		expression
 					| member_list ',' expression
 					;
 				
-expression:			IDENTIFIER								{ $$=AQL::AqlNode::CreateDefaultNode(); printf("Identifier: \"%s\"\n", $1); }
-					| IDENTIFIER MEMBER_PTR IDENTIFIER		{ $$=AQL::AqlNode::CreateDefaultNode(); }
-					| IDENTIFIER '(' expression ')'			{ $$=AQL::AqlNode::CreateDefaultNode(); }
-					| INTEGER								{ $$=AQL::AqlNode::CreateDefaultNode(); printf("Integer: \"%s\"\n", $1); }
-					| FLOAT									{ $$=AQL::AqlNode::CreateDefaultNode(); printf("Float: \"%s\"\n", $1); }
-					| STRING								{ $$=AQL::AqlNode::CreateDefaultNode(); printf("String: \"%s\"\n", $1); }
+expression:			IDENTIFIER								{ printf("Identifier: \"%s\"\n", $1); }
+					| IDENTIFIER MEMBER_PTR IDENTIFIER		{  }
+					| IDENTIFIER '(' expression ')'			{  }
+					| INTEGER								{  printf("Integer: \"%s\"\n", $1); }
+					| FLOAT									{  printf("Float: \"%s\"\n", $1); }
+					| STRING								{  printf("String: \"%s\"\n", $1); }
 					;
 
 %%
+
 
 void yyerror(const char *s) {
 	fprintf(stderr, "%s\n", s);

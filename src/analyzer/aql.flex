@@ -8,7 +8,6 @@
 	#include <iostream>
 	#include "..\qtree\AqlInclude.h"
 	#include "..\qtree\AqlNode.h"
-	#include "y.tab.h"
 %}
 
 %%
@@ -27,6 +26,7 @@
 					cpyIdName = (char *) malloc(sizeof(yytext));
 					strcpy(cpyIdName, yytext);
 					yylval.idName = cpyIdName;
+					// yylval = static_cast<YYSTYPE>(AQL::AqlNode::CreateDefaultNode());
 					return IDENTIFIER;
 				}
 
@@ -35,6 +35,7 @@
 					cpyLitValue = (char *) malloc(sizeof(yytext));
 					strcpy(cpyLitValue, yytext);
 					yylval.litValue = cpyLitValue;
+					// yylval = AQL::AqlNode::CreateDefaultNode();
 					return INTEGER;
 				}
 
@@ -43,6 +44,7 @@
 					cpyLitValue = (char *) malloc(yyleng);
 					strcpy(cpyLitValue, yytext);
 					yylval.litValue = cpyLitValue;
+					// yylval = AQL::AqlNode::CreateDefaultNode();
 					return FLOAT;
 				}
 
@@ -52,6 +54,7 @@
 					cpyLitValue = (char *) malloc(sizeof(yytext) - 2);
 					strncpy(cpyLitValue, yytext+1, length);
 					yylval.litValue = cpyLitValue;
+					// yylval = AQL::AqlNode::CreateDefaultNode();
 					return STRING;
 				}
 
