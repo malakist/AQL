@@ -2,23 +2,25 @@
 #define AQL_DRIVER_H
 
 #include <string>
-#include "..\qtree\AqlQueriesManager.h"
-#include "aql-driver.tab.hh"
+//#include "..\qtree\AqlQueriesManager.h"
+#include "aql-parser.tab.hh"
 
 #define YY_DECL	\
 AQL::aql_parser::token_type	\
 yylex(	AQL::aql_parser::semantic_type* yylval, \
 		AQL::aql_parser::location_type* yylloc, \
-		aql_driver& driver)
+		AQL::aql_driver& driver)
 		
 YY_DECL;
+
+namespace AQL {
 
 class aql_driver {
 public:
 	aql_driver();
 	virtual ~aql_driver();
 	
-	AQL::AqlQueriesManager* qManager;
+	//AQL::AqlQueriesManager* qManager;
 	
 	int result;
 	
@@ -34,5 +36,7 @@ public:
 	void error(const AQL::location& l, const std::string& m);
 	void error(const std::string& m);
 };
+
+} //namespace AQL
 
 #endif
