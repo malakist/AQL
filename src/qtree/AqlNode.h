@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include "AqlInclude.h"
 
 namespace AQL {
 
@@ -11,13 +10,17 @@ class AqlNode {
 private:
 	int childCount;
 	std::vector<AqlNode*> *childNodes;
-	AqlNodeType nodeType;
+protected:
+	AqlNode * getNodeAtPosition(const int position) const;
+	std::size_t getChildCount(void) const;
+	std::string location;
 public:			
-	explicit AqlNode(AqlNodeType, int, ...);
+	explicit AqlNode();
+	virtual ~AqlNode();
 	AqlNode& operator=(AqlNode& rhs);
-	AqlNode * GetNodeAtPosition(const int position);
-	int GetChildCount(void);
-	static AqlNode* CreateDefaultNode(void);
+	void setLocation(const char *);
+	const char * getLocation(void) const;
+	void addChildNodes(const short nodeCount, ...);
 };
 
 } 

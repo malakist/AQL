@@ -3,7 +3,7 @@ BISON=C:\gnuwin32\bin\bison.exe
 FLEX=C:\gnuwin32\bin\flex.exe
 
 all: flex
-	$(CC) aql-driver.cpp aql-parser.tab.cc lex.yy.c aqlc.cpp -o aqlc.exe
+	$(CC) aql-driver.cpp aql-parser.tab.cc lex.yy.c aqlc.cpp ..\qtree\AqlNode.cpp ..\qtree\StringNode.cpp -o aqlc.exe
 
 bison: clean
 	$(BISON) aql-parser.yy

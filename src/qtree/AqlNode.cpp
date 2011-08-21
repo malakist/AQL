@@ -1,40 +1,44 @@
 #include <string>
 #include <cstdarg>
 #include "AqlNode.h"
-#include "AqlInclude.h"
-
-using namespace std;
 
 namespace AQL {
 
-AqlNode::AqlNode(AqlNodeType nodeType, int childCount, ...) {
-	va_list ap;
-	int i;
-	
-	this->nodeType = nodeType;
-	this->childCount = childCount;
-	this->childNodes = new std::vector<AqlNode*>;
-	
-	va_start(ap, childCount);
-	for (i = 0; i < childCount; i++)
-		this->childNodes->push_back(va_arg(ap, AqlNode*));
-	va_end(ap);
+AqlNode::AqlNode() {}
+
+AqlNode::~AqlNode(void) {
+	delete this->childNodes;
 }
 
 AqlNode& AqlNode::operator=(AqlNode& rhs) {
 	return *this;
 }
 
-AqlNode * AqlNode::GetNodeAtPosition(const int position) {
+AqlNode * AqlNode::getNodeAtPosition(const int position) const {
 	return (*(this->childNodes))[position];
 }
 
-int AqlNode::GetChildCount(void) {
-	return this->childCount;
+std::size_t AqlNode::getChildCount(void) const {
+	return this->childNodes->size();
 }
 
-AqlNode * AqlNode::CreateDefaultNode(void) {
-	return (AqlNode *) 0;
+void AqlNode::setLocation(const char * l) {
+	location = std::string(l);
+}
+
+const char * AqlNode::getLocation(void) const {
+	return location.c_str();
+}
+
+void AqlNode::addChildNodes(const short nodeCount, ...) {
+	va_list ap;
+	short i;
+
+	va_start(ap, nodeCount);
+	if (!(this->childNodes)) this->childNodes = new std::vector<AqlNode*>;
+	for (i = 0; i < nodeCount; i++)
+		this->childNodes->push_back(va_arg(ap, AqlNode*));
+	va_end(ap);
 }
 
 } // namespace

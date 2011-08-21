@@ -50,7 +50,7 @@
 /* Unqualified %code blocks.  */
 
 /* Line 318 of lalr1.cc  */
-#line 25 "aql-parser.yy"
+#line 26 "aql-parser.yy"
 
 #include "aql-driver.h"
 
@@ -302,7 +302,7 @@ namespace AQL {
     /* User initialization code.  */
     
 /* Line 553 of lalr1.cc  */
-#line 20 "aql-parser.yy"
+#line 21 "aql-parser.yy"
 {
 	yylloc.begin.filename = yylloc.end.filename = &driver.file;
 }
@@ -427,63 +427,70 @@ namespace AQL {
 	  case 2:
 
 /* Line 678 of lalr1.cc  */
-#line 54 "aql-parser.yy"
+#line 55 "aql-parser.yy"
     { }
     break;
 
   case 3:
 
 /* Line 678 of lalr1.cc  */
-#line 55 "aql-parser.yy"
+#line 56 "aql-parser.yy"
     { }
     break;
 
-  case 24:
+  case 13:
 
 /* Line 678 of lalr1.cc  */
-#line 94 "aql-parser.yy"
-    {   }
+#line 78 "aql-parser.yy"
+    { (yyval) = new AQL::StringNode; (yyval)->addChildNodes(2, (yysemantic_stack_[(3) - (1)]), (yysemantic_stack_[(3) - (3)]));}
     break;
 
-  case 25:
+  case 24:
 
 /* Line 678 of lalr1.cc  */
 #line 95 "aql-parser.yy"
     {   }
     break;
 
-  case 26:
+  case 25:
 
 /* Line 678 of lalr1.cc  */
 #line 96 "aql-parser.yy"
     {   }
     break;
 
-  case 27:
+  case 26:
 
 /* Line 678 of lalr1.cc  */
 #line 97 "aql-parser.yy"
     {   }
     break;
 
-  case 28:
+  case 27:
 
 /* Line 678 of lalr1.cc  */
 #line 98 "aql-parser.yy"
     {   }
     break;
 
-  case 29:
+  case 28:
 
 /* Line 678 of lalr1.cc  */
 #line 99 "aql-parser.yy"
     {   }
     break;
 
+  case 29:
+
+/* Line 678 of lalr1.cc  */
+#line 100 "aql-parser.yy"
+    { (yyval) = new AQL::StringNode; }
+    break;
+
 
 
 /* Line 678 of lalr1.cc  */
-#line 487 "aql-parser.tab.cc"
+#line 494 "aql-parser.tab.cc"
 	default:
           break;
       }
@@ -845,9 +852,9 @@ namespace AQL {
   const unsigned char
   aql_parser::yyrline_[] =
   {
-         0,    54,    54,    55,    58,    61,    62,    65,    68,    71,
-      72,    73,    76,    77,    78,    79,    80,    81,    82,    83,
-      86,    87,    90,    91,    94,    95,    96,    97,    98,    99
+         0,    55,    55,    56,    59,    62,    63,    66,    69,    72,
+      73,    74,    77,    78,    79,    80,    81,    82,    83,    84,
+      87,    88,    91,    92,    95,    96,    97,    98,    99,   100
   };
 
   // Print the state stack on the debug stream.
@@ -940,11 +947,11 @@ namespace AQL {
 } // AQL
 
 /* Line 1054 of lalr1.cc  */
-#line 944 "aql-parser.tab.cc"
+#line 951 "aql-parser.tab.cc"
 
 
 /* Line 1056 of lalr1.cc  */
-#line 102 "aql-parser.yy"
+#line 103 "aql-parser.yy"
 
 void AQL::aql_parser::error(const AQL::aql_parser::location_type& l, const std::string& m) {
 	driver.error(l, m);
