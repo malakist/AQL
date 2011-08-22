@@ -65,6 +65,7 @@
 					//strncpy(cpyLitValue, yytext+1, length);
 					//yylval.litValue = cpyLitValue;
 					// yylval = AQL::AqlNode::CreateDefaultNode();
+					driver.setCurrentLocation(*yylloc);
 					return token::STRING;
 				}
 

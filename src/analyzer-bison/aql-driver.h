@@ -2,7 +2,7 @@
 #define AQL_DRIVER_H
 
 #include <string>
-//#include "..\qtree\AqlQueriesManager.h"
+#include <sstream>
 #include "aql-parser.tab.hh"
 
 #define YY_DECL	\
@@ -16,6 +16,8 @@ YY_DECL;
 namespace AQL {
 
 class aql_driver {
+private:
+	std::stringstream _currentLocation;
 public:
 	aql_driver();
 	virtual ~aql_driver();
@@ -35,6 +37,9 @@ public:
 	
 	void error(const AQL::location& l, const std::string& m);
 	void error(const std::string& m);
+	
+	void setCurrentLocation(const AQL::location& l);
+	const char * getLocationString(void) const;
 };
 
 } //namespace AQL

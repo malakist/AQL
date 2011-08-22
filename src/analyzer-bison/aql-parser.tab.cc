@@ -456,7 +456,7 @@ namespace AQL {
 
 /* Line 678 of lalr1.cc  */
 #line 96 "aql-parser.yy"
-    {   }
+    { 	  }
     break;
 
   case 26:
@@ -484,7 +484,7 @@ namespace AQL {
 
 /* Line 678 of lalr1.cc  */
 #line 100 "aql-parser.yy"
-    { (yyval) = new AQL::StringNode; }
+    { (yyval) = new AQL::StringNode;}
     break;
 
 

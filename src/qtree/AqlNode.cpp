@@ -34,6 +34,7 @@ void AqlNode::addChildNodes(const short nodeCount, ...) {
 	va_list ap;
 	short i;
 
+	//TODO appcrash ocorrendo aqui, apos tentativa de leitura de localizacao no arquivo
 	va_start(ap, nodeCount);
 	if (!(this->childNodes)) this->childNodes = new std::vector<AqlNode*>;
 	for (i = 0; i < nodeCount; i++)

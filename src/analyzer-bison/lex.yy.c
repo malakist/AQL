@@ -415,9 +415,9 @@ int yy_flex_debug = 1;
 
 static yyconst short int yy_rule_linenum[23] =
     {   0,
-       27,   28,   30,   31,   32,   34,   43,   52,   61,   71,
-       72,   73,   74,   75,   76,   77,   78,   79,   80,   81,
-       83,   85
+       27,   28,   30,   31,   32,   34,   43,   52,   61,   72,
+       73,   74,   75,   76,   77,   78,   79,   80,   81,   82,
+       84,   86
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -768,80 +768,81 @@ YY_RULE_SETUP
 					//strncpy(cpyLitValue, yytext+1, length);
 					//yylval.litValue = cpyLitValue;
 					// yylval = AQL::AqlNode::CreateDefaultNode();
+					driver.setCurrentLocation(*yylloc);
 					return token::STRING;
 				}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 71 "aql-scanner.fl"
+#line 72 "aql-scanner.fl"
 return token::MEMBER_PTR;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 72 "aql-scanner.fl"
+#line 73 "aql-scanner.fl"
 return token::EQ;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 73 "aql-scanner.fl"
+#line 74 "aql-scanner.fl"
 return token::NE;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 74 "aql-scanner.fl"
+#line 75 "aql-scanner.fl"
 return token::NE;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 75 "aql-scanner.fl"
+#line 76 "aql-scanner.fl"
 return token::GT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 76 "aql-scanner.fl"
+#line 77 "aql-scanner.fl"
 return token::LT;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 77 "aql-scanner.fl"
+#line 78 "aql-scanner.fl"
 return token::GE;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 78 "aql-scanner.fl"
+#line 79 "aql-scanner.fl"
 return token::LT;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 79 "aql-scanner.fl"
+#line 80 "aql-scanner.fl"
 return token::NOT;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 80 "aql-scanner.fl"
+#line 81 "aql-scanner.fl"
 return token::AND;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 81 "aql-scanner.fl"
+#line 82 "aql-scanner.fl"
 return token::OR;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 83 "aql-scanner.fl"
+#line 84 "aql-scanner.fl"
 /* nao devolve espacos em branco */
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 85 "aql-scanner.fl"
+#line 86 "aql-scanner.fl"
 driver.error(*yylloc, "Caracter Invalido");
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 87 "aql-scanner.fl"
+#line 88 "aql-scanner.fl"
 ECHO;
 	YY_BREAK
-#line 845 "lex.yy.c"
+#line 846 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1728,7 +1729,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 87 "aql-scanner.fl"
+#line 88 "aql-scanner.fl"
 
 
 void AQL::aql_driver::scan_begin() {
