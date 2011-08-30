@@ -17,7 +17,9 @@ namespace AQL {
 
 class aql_driver {
 private:
-	std::stringstream _currentLocation;
+	std::string* currentFileName;
+	unsigned int currentLine;
+	unsigned int currentColumn;
 public:
 	aql_driver();
 	virtual ~aql_driver();
@@ -39,7 +41,7 @@ public:
 	void error(const std::string& m);
 	
 	void setCurrentLocation(const AQL::location& l);
-	const char * getLocationString(void) const;
+	std::string * getLocationString(void) const;
 };
 
 } //namespace AQL

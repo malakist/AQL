@@ -5,7 +5,7 @@
 #include <memory>
 
 AQL::aql_driver::aql_driver()
-	:trace_scanning(false), trace_parsing(false), result(0), _currentLocation("", std::ios_base::in | std::ios_base::out)
+	:trace_scanning(false), trace_parsing(false), result(0), currentFileName(0), currentLine(0), currentColumn(0)
 { }
 
 AQL::aql_driver::~aql_driver() {}
@@ -33,14 +33,17 @@ AQL::aql_driver::error(const std::string& m) {
 
 void
 AQL::aql_driver::setCurrentLocation(const AQL::location& l) {
-	_currentLocation.str("");
-	_currentLocation << l;
-	_currentLocation.flush();
-	//std::cout << "Localizacao: " << this->getLocationString() << std::endl;
+	currentFileName = l.end.filename;
+	currentLine = l.end.line;
+	currentColumn = l.end.column;
+	std::cout << "Localizacao: " << *(this->getLocationString()) << std::endl;
 }
 
-const char * AQL::aql_driver::getLocationString(void) const {	
-	std::string str(_currentLocation.str());
-	const char * result = str.c_str();
-	return result;
+std::string * 
+AQL::aql_driver::getLocationString(void) const {		
+	std::string* res = this->currentFileName;
+	std::string cont = *res;
+	cont.append(": ");
+	std::cout << "getLocationString: " << *res << std::endl;
+	return res;
 }

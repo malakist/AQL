@@ -4,7 +4,7 @@
 
 namespace AQL {
 
-AqlNode::AqlNode() {}
+AqlNode::AqlNode() : childCount(0), location("") {}
 
 AqlNode::~AqlNode(void) {
 	delete this->childNodes;
