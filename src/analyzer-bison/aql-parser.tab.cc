@@ -50,7 +50,7 @@
 /* Unqualified %code blocks.  */
 
 /* Line 318 of lalr1.cc  */
-#line 26 "aql-parser.yy"
+#line 30 "aql-parser.yy"
 
 #include "aql-driver.h"
 
@@ -302,7 +302,7 @@ namespace AQL {
     /* User initialization code.  */
     
 /* Line 553 of lalr1.cc  */
-#line 21 "aql-parser.yy"
+#line 25 "aql-parser.yy"
 {
 	yylloc.begin.filename = yylloc.end.filename = &driver.file;
 }
@@ -427,70 +427,99 @@ namespace AQL {
 	  case 2:
 
 /* Line 678 of lalr1.cc  */
-#line 55 "aql-parser.yy"
+#line 70 "aql-parser.yy"
     { }
     break;
 
   case 3:
 
 /* Line 678 of lalr1.cc  */
-#line 56 "aql-parser.yy"
+#line 71 "aql-parser.yy"
     { }
     break;
 
   case 13:
 
 /* Line 678 of lalr1.cc  */
-#line 78 "aql-parser.yy"
-    { (yyval) = new AQL::StringNode; (yyval)->addChildNodes(2, (yysemantic_stack_[(3) - (1)]), (yysemantic_stack_[(3) - (3)]));}
+#line 93 "aql-parser.yy"
+    {   }
+    break;
+
+  case 20:
+
+/* Line 678 of lalr1.cc  */
+#line 102 "aql-parser.yy"
+    { (yyval.aqlNode) = new AQL::SelectNode(); }
+    break;
+
+  case 21:
+
+/* Line 678 of lalr1.cc  */
+#line 104 "aql-parser.yy"
+    { 
+							(yyval.aqlNode) = new AQL::SelectNode();
+							AQL::AqlNode * node = (yysemantic_stack_[(2) - (2)].aqlNode)->getLeftNode();
+							while(node) {
+								(yyval.aqlNode)->addChildNode(node);
+								node = node->getLeftNode();
+							}
+						}
+    break;
+
+  case 22:
+
+/* Line 678 of lalr1.cc  */
+#line 115 "aql-parser.yy"
+    {
+							(yyval.aqlNode) = new AQL::MembersNode(); (yyval.aqlNode)->setRightNode((yysemantic_stack_[(1) - (1)].aqlNode)); (yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode);
+						}
+    break;
+
+  case 23:
+
+/* Line 678 of lalr1.cc  */
+#line 119 "aql-parser.yy"
+    {
+							(yysemantic_stack_[(3) - (1)].aqlNode)->setRightNode((yysemantic_stack_[(3) - (3)].aqlNode));
+							(yyval.aqlNode) = (yysemantic_stack_[(3) - (3)].aqlNode);
+						}
     break;
 
   case 24:
 
 /* Line 678 of lalr1.cc  */
-#line 95 "aql-parser.yy"
-    {   }
+#line 126 "aql-parser.yy"
+    {
+							AQL::ColumnNode * node = new AQL::ColumnNode();
+							node->setTableName((yysemantic_stack_[(3) - (1)].identifierName));
+							node->setColumnName((yysemantic_stack_[(3) - (3)].identifierName));
+							(yyval.aqlNode) = node;
+						}
     break;
 
   case 25:
 
 /* Line 678 of lalr1.cc  */
-#line 96 "aql-parser.yy"
-    { 	  }
+#line 133 "aql-parser.yy"
+    {
+							AQL::FunctionNode * node = new AQL::FunctionNode(); 
+							node->setFunctionName((yysemantic_stack_[(4) - (1)].identifierName));
+							node->setArgument((yysemantic_stack_[(4) - (3)].aqlNode));
+							(yyval.aqlNode) = node; 
+						}
     break;
 
   case 26:
 
 /* Line 678 of lalr1.cc  */
-#line 97 "aql-parser.yy"
-    {   }
-    break;
-
-  case 27:
-
-/* Line 678 of lalr1.cc  */
-#line 98 "aql-parser.yy"
-    {   }
-    break;
-
-  case 28:
-
-/* Line 678 of lalr1.cc  */
-#line 99 "aql-parser.yy"
-    {   }
-    break;
-
-  case 29:
-
-/* Line 678 of lalr1.cc  */
-#line 100 "aql-parser.yy"
-    { (yyval) = new AQL::StringNode;}
+#line 139 "aql-parser.yy"
+    { (yyval.aqlNode) = (yysemantic_stack_[(3) - (2)].aqlNode); }
     break;
 
 
 
 /* Line 678 of lalr1.cc  */
-#line 494 "aql-parser.tab.cc"
+#line 523 "aql-parser.tab.cc"
 	default:
           break;
       }
@@ -695,16 +724,16 @@ namespace AQL {
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-  const signed char aql_parser::yypact_ninf_ = -17;
+  const signed char aql_parser::yypact_ninf_ = -16;
   const signed char
   aql_parser::yypact_[] =
   {
-        -7,    18,    36,    34,   -15,   -17,   -17,    -1,   -17,     2,
-       6,    19,    20,    34,    -6,   -17,   -17,   -17,     2,     4,
-     -17,    21,    17,   -17,    22,   -17,   -17,    37,     6,   -17,
-       2,     2,     6,     6,     6,     6,     6,     6,     6,   -17,
-     -17,    23,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,
-     -17,   -17
+       -15,     0,    18,    20,   -11,   -16,   -16,     9,   -16,    -2,
+      10,    13,    21,    20,    -1,   -16,   -16,   -16,    -2,    10,
+      -5,   -16,    28,    22,   -16,    24,   -16,   -16,    40,    10,
+     -16,    23,    -2,    -2,    10,    10,    10,    10,    10,    10,
+      10,   -16,   -16,    25,   -16,   -16,   -16,   -16,   -16,   -16,
+     -16,   -16,   -16,   -16,   -16
   };
 
   /* YYDEFACT[S] -- default rule to reduce with in state S when YYTABLE
@@ -714,18 +743,18 @@ namespace AQL {
   aql_parser::yydefact_[] =
   {
          0,     0,     0,     0,     0,     1,     7,     4,     5,     0,
-      20,     0,     0,     0,    24,    27,    28,    29,     0,     8,
-       9,    12,    21,    22,     0,     3,     6,     0,     0,    19,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     2,
-      25,     0,    10,    11,    13,    14,    15,    16,    17,    18,
-      23,    26
+      20,     0,     0,     0,     0,    27,    28,    29,     0,     0,
+       8,     9,    12,    21,    22,     0,     3,     6,     0,     0,
+      19,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     2,    24,     0,    26,    10,    11,    13,    14,    15,
+      16,    17,    18,    23,    25
   };
 
   /* YYPGOTO[NTERM-NUM].  */
   const signed char
   aql_parser::yypgoto_[] =
   {
-       -17,   -17,   -17,   -17,    29,   -17,   -17,   -16,    33,   -17,
+       -16,   -16,   -16,   -16,    33,   -16,   -16,     2,    37,   -16,
      -10
   };
 
@@ -733,8 +762,8 @@ namespace AQL {
   const signed char
   aql_parser::yydefgoto_[] =
   {
-        -1,     2,     4,     7,     8,    11,    19,    20,    12,    22,
-      21
+        -1,     2,     4,     7,     8,    11,    20,    21,    12,    23,
+      22
   };
 
   /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -744,22 +773,22 @@ namespace AQL {
   const unsigned char
   aql_parser::yytable_[] =
   {
-        23,    27,    29,     9,    10,    14,    15,    16,    17,    14,
-      15,    16,    17,     1,    42,    43,    18,    28,    41,    30,
-      31,    13,    44,    45,    46,    47,    48,    49,    50,    32,
-      33,    34,    35,    36,    37,     3,     5,     6,    10,    38,
-      40,    25,    26,    39,    24,     0,     0,    51
+        24,    14,    15,    16,    17,     1,    28,     9,    10,    31,
+      32,    33,    18,    14,    15,    16,    17,     3,     5,    43,
+      30,    19,    29,     6,    47,    48,    49,    50,    51,    52,
+      53,    13,    10,    19,    45,    46,    34,    35,    36,    37,
+      38,    39,    26,    42,    40,    41,    27,    44,    25,    54
   };
 
   /* YYCHECK.  */
-  const signed char
+  const unsigned char
   aql_parser::yycheck_[] =
   {
-        10,     7,    18,    18,    19,     3,     4,     5,     6,     3,
-       4,     5,     6,    20,    30,    31,    14,    23,    28,    15,
-      16,    22,    32,    33,    34,    35,    36,    37,    38,     8,
-       9,    10,    11,    12,    13,    17,     0,     3,    19,    22,
-       3,    21,    13,    21,    11,    -1,    -1,    24
+        10,     3,     4,     5,     6,    20,     7,    18,    19,    19,
+      15,    16,    14,     3,     4,     5,     6,    17,     0,    29,
+      18,    23,    23,     3,    34,    35,    36,    37,    38,    39,
+      40,    22,    19,    23,    32,    33,     8,     9,    10,    11,
+      12,    13,    21,     3,    22,    21,    13,    24,    11,    24
   };
 
   /* STOS_[STATE-NUM] -- The (internal number of the) accessing
@@ -768,11 +797,11 @@ namespace AQL {
   aql_parser::yystos_[] =
   {
          0,    20,    26,    17,    27,     0,     3,    28,    29,    18,
-      19,    30,    33,    22,     3,     4,     5,     6,    14,    31,
-      32,    35,    34,    35,    33,    21,    29,     7,    23,    32,
-      15,    16,     8,     9,    10,    11,    12,    13,    22,    21,
-       3,    35,    32,    32,    35,    35,    35,    35,    35,    35,
-      35,    24
+      19,    30,    33,    22,     3,     4,     5,     6,    14,    23,
+      31,    32,    35,    34,    35,    33,    21,    29,     7,    23,
+      32,    35,    15,    16,     8,     9,    10,    11,    12,    13,
+      22,    21,     3,    35,    24,    32,    32,    35,    35,    35,
+      35,    35,    35,    35,    24
   };
 
 #if YYDEBUG
@@ -802,7 +831,7 @@ namespace AQL {
   {
          0,     2,     5,     4,     2,     1,     3,     1,     2,     1,
        3,     3,     1,     3,     3,     3,     3,     3,     3,     2,
-       1,     2,     1,     3,     1,     3,     4,     1,     1,     1
+       1,     2,     1,     3,     3,     4,     3,     1,     1,     1
   };
 
 #if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
@@ -833,9 +862,9 @@ namespace AQL {
       35,     8,    35,    -1,    35,     9,    35,    -1,    35,    10,
       35,    -1,    35,    11,    35,    -1,    35,    12,    35,    -1,
       35,    13,    35,    -1,    14,    32,    -1,    19,    -1,    19,
-      34,    -1,    35,    -1,    34,    22,    35,    -1,     3,    -1,
-       3,     7,     3,    -1,     3,    23,    35,    24,    -1,     4,
-      -1,     5,    -1,     6,    -1
+      34,    -1,    35,    -1,    34,    22,    35,    -1,     3,     7,
+       3,    -1,     3,    23,    35,    24,    -1,    23,    35,    24,
+      -1,     4,    -1,     5,    -1,     6,    -1
   };
 
   /* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
@@ -845,16 +874,16 @@ namespace AQL {
   {
          0,     0,     3,     9,    14,    17,    19,    23,    25,    28,
       30,    34,    38,    40,    44,    48,    52,    56,    60,    64,
-      67,    69,    72,    74,    78,    80,    84,    89,    91,    93
+      67,    69,    72,    74,    78,    82,    87,    91,    93,    95
   };
 
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
   const unsigned char
   aql_parser::yyrline_[] =
   {
-         0,    55,    55,    56,    59,    62,    63,    66,    69,    72,
-      73,    74,    77,    78,    79,    80,    81,    82,    83,    84,
-      87,    88,    91,    92,    95,    96,    97,    98,    99,   100
+         0,    70,    70,    71,    74,    77,    78,    81,    84,    87,
+      88,    89,    92,    93,    94,    95,    96,    97,    98,    99,
+     102,   103,   114,   118,   125,   132,   139,   140,   141,   142
   };
 
   // Print the state stack on the debug stream.
@@ -930,7 +959,7 @@ namespace AQL {
   }
 
   const int aql_parser::yyeof_ = 0;
-  const int aql_parser::yylast_ = 47;
+  const int aql_parser::yylast_ = 49;
   const int aql_parser::yynnts_ = 11;
   const int aql_parser::yyempty_ = -2;
   const int aql_parser::yyfinal_ = 5;
@@ -947,11 +976,11 @@ namespace AQL {
 } // AQL
 
 /* Line 1054 of lalr1.cc  */
-#line 951 "aql-parser.tab.cc"
+#line 980 "aql-parser.tab.cc"
 
 
 /* Line 1056 of lalr1.cc  */
-#line 103 "aql-parser.yy"
+#line 145 "aql-parser.yy"
 
 void AQL::aql_parser::error(const AQL::aql_parser::location_type& l, const std::string& m) {
 	driver.error(l, m);

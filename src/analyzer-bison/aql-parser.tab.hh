@@ -45,8 +45,12 @@
 #include <string>
 #include "..\qtree\AqlNode.h"
 #include "..\qtree\StringNode.h"
+#include "..\qtree\FunctionNode.h"
+#include "..\qtree\ColumnNode.h"
+#include "..\qtree\MembersNode.h"
+#include "..\qtree\SelectNode.h"
 
-#define YYSTYPE AQL::AqlNode*
+//#define YYSTYPE const char *
 
 namespace AQL {
 	class aql_driver; 
@@ -55,7 +59,7 @@ namespace AQL {
 
 
 /* Line 35 of lalr1.cc  */
-#line 59 "aql-parser.tab.hh"
+#line 63 "aql-parser.tab.hh"
 
 
 #include <string>
@@ -68,7 +72,7 @@ namespace AQL {
 namespace AQL {
 
 /* Line 35 of lalr1.cc  */
-#line 72 "aql-parser.tab.hh"
+#line 76 "aql-parser.tab.hh"
   class position;
   class location;
 
@@ -77,7 +81,7 @@ namespace AQL {
 } // AQL
 
 /* Line 35 of lalr1.cc  */
-#line 81 "aql-parser.tab.hh"
+#line 85 "aql-parser.tab.hh"
 
 #include "location.hh"
 
@@ -124,7 +128,7 @@ do {							\
 namespace AQL {
 
 /* Line 35 of lalr1.cc  */
-#line 128 "aql-parser.tab.hh"
+#line 132 "aql-parser.tab.hh"
 
   /// A Bison parser.
   class aql_parser
@@ -132,7 +136,20 @@ namespace AQL {
   public:
     /// Symbol semantic values.
 #ifndef YYSTYPE
-    typedef int semantic_type;
+    union semantic_type
+    {
+
+/* Line 35 of lalr1.cc  */
+#line 55 "aql-parser.yy"
+
+	AQL::AqlNode *aqlNode;
+	char * identifierName;
+
+
+
+/* Line 35 of lalr1.cc  */
+#line 152 "aql-parser.tab.hh"
+    };
 #else
     typedef YYSTYPE semantic_type;
 #endif
@@ -259,7 +276,7 @@ namespace AQL {
     static const unsigned char yytable_[];
     static const signed char yytable_ninf_;
 
-    static const signed char yycheck_[];
+    static const unsigned char yycheck_[];
 
     /// For a state, its accessing symbol.
     static const unsigned char yystos_[];
@@ -338,7 +355,7 @@ namespace AQL {
 } // AQL
 
 /* Line 35 of lalr1.cc  */
-#line 342 "aql-parser.tab.hh"
+#line 359 "aql-parser.tab.hh"
 
 
 

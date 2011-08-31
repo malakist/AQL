@@ -33,9 +33,11 @@ AQL::aql_driver::error(const std::string& m) {
 
 void
 AQL::aql_driver::setCurrentLocation(const AQL::location& l) {
-	currentFileName = l.end.filename;
-	currentLine = l.end.line;
-	currentColumn = l.end.column;
+	{
+		currentFileName = l.end.filename;
+		currentLine = l.end.line;
+		currentColumn = l.end.column;
+	}
 	std::cout << "Localizacao: " << *(this->getLocationString()) << std::endl;
 }
 

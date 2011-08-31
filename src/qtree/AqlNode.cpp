@@ -1,17 +1,21 @@
 #include <string>
 #include <cstdarg>
+#include <vector>
+#include <iostream>
 #include "AqlNode.h"
 
 namespace AQL {
 
-AqlNode::AqlNode() : childCount(0), location("") {}
+AqlNode::AqlNode() : childCount(0), location("") {
+	this->childNodes = new std::vector<AqlNode*>();
+	this->leftNode = (AqlNode *) 0;
+	this->rightNode = (AqlNode *) 0;
+	
+	std::cout << "Criou um node" << std::endl;
+}
 
 AqlNode::~AqlNode(void) {
 	delete this->childNodes;
-}
-
-AqlNode& AqlNode::operator=(AqlNode& rhs) {
-	return *this;
 }
 
 AqlNode * AqlNode::getNodeAtPosition(const int position) const {
@@ -30,16 +34,21 @@ const char * AqlNode::getLocation(void) const {
 	return location.c_str();
 }
 
-void AqlNode::addChildNodes(const short nodeCount, ...) {
-	va_list ap;
-	short i;
+void AqlNode::addChildNode(AqlNode * node) {
+	this->childNodes->push_back(node);
+}
 
-	//TODO appcrash ocorrendo aqui, apos tentativa de leitura de localizacao no arquivo
-	va_start(ap, nodeCount);
-	if (!(this->childNodes)) this->childNodes = new std::vector<AqlNode*>;
-	for (i = 0; i < nodeCount; i++)
-		this->childNodes->push_back(va_arg(ap, AqlNode*));
-	va_end(ap);
+void AqlNode::setRightNode(AqlNode * node) {
+	this->rightNode = node;
+	this->rightNode->setLeftNode(this);
+}
+
+void AqlNode::setLeftNode(AqlNode * node) {
+	this->leftNode = node;	
+}
+
+AqlNode * AqlNode::getLeftNode(void) {
+	return this->leftNode;
 }
 
 } // namespace

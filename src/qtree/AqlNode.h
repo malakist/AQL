@@ -10,6 +10,8 @@ class AqlNode {
 private:
 	int childCount;
 	std::vector<AqlNode*> *childNodes;
+	AqlNode * rightNode;
+	AqlNode * leftNode;
 protected:
 	AqlNode * getNodeAtPosition(const int position) const;
 	std::size_t getChildCount(void) const;
@@ -17,10 +19,13 @@ protected:
 public:			
 	explicit AqlNode();
 	virtual ~AqlNode();
-	AqlNode& operator=(AqlNode& rhs);
 	void setLocation(const char *);
 	const char * getLocation(void) const;
-	void addChildNodes(const short nodeCount, ...);
+	void addChildNode(AqlNode *);
+	void setRightNode(AqlNode *);
+	void setLeftNode(AqlNode *);
+	AqlNode * getLeftNode(void);
+	
 };
 
 } 
