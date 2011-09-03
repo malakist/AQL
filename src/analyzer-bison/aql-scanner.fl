@@ -4,10 +4,6 @@
 #include <string.h>
 #include <iostream>
 #include "..\qtree\AqlNode.h"
-#include "..\qtree\FunctionNode.h"
-#include "..\qtree\ColumnNode.h"
-#include "..\qtree\IntegerNode.h"
-#include "..\qtree\FloatNode.h"
 #include "aql-driver.h"
 #include "aql-parser.tab.hh"
 
@@ -36,34 +32,22 @@
 "Select"			return token::SELECT_BEGIN;
 
 [a-zA-Z][_a-zA-Z0-9]*		{
-					yylval->identifierName = yytext;
+					yylval->identifierName = strdup(yytext);
 					return token::IDENTIFIER;
 				}
 
 [0-9]+				{
-					char * cpyLitValue;
-					cpyLitValue = (char *) malloc(sizeof(yytext));
-					strcpy(cpyLitValue, yytext);
-					yylval->aqlNode = new AQL::IntegerNode();
-					free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::INTEGER;
 				}
 
 [0-9]*\.[0-9]+		{
-					char * cpyLitValue;
-					cpyLitValue = (char *) malloc(yyleng);
-					strcpy(cpyLitValue, yytext);
-					yylval->aqlNode = new AQL::FloatNode();
-					free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::FLOAT;
 				}
 
 [\"][0-9A-Za-z]*[\"]		{
-					char * cpyLitValue;					
-					cpyLitValue = (char *) malloc(yyleng - 2);
-					strncpy(cpyLitValue, yytext+1, yyleng);
-					yylval->aqlNode = new AQL::StringNode();
-                                        free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::STRING;
 				}
 

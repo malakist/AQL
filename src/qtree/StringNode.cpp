@@ -1,22 +1,12 @@
-/*
- * StringNode.cpp
- *
- *  Created on: 21/08/2011
- *      Author: Rodrigo
- */
-
 #include <iostream>
 #include "StringNode.h"
 
 namespace AQL {
 
-StringNode::StringNode() {
-	// TODO Auto-generated constructor stub
-	std::cout << "Voce acabou de criar um string node." << std::endl;
-}
+StringNode::~StringNode() {}
 
-StringNode::~StringNode() {
-	// TODO Auto-generated destructor stub
+const std::string StringNode::emitString() const {
+	return std::string("StringNode:") + _nodeValue;
 }
 
 } //namespace

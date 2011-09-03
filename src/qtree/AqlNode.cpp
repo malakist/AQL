@@ -10,15 +10,13 @@ AqlNode::AqlNode() : childCount(0), location("") {
 	this->childNodes = new std::vector<AqlNode*>();
 	this->leftNode = (AqlNode *) 0;
 	this->rightNode = (AqlNode *) 0;
-	
-	std::cout << "Criou um node" << std::endl;
 }
 
 AqlNode::~AqlNode(void) {
 	delete this->childNodes;
 }
 
-AqlNode * AqlNode::getNodeAtPosition(const int position) const {
+const AqlNode * AqlNode::getNodeAtPosition(const int position) const {
 	return (*(this->childNodes))[position];
 }
 
@@ -31,7 +29,7 @@ void AqlNode::setLocation(const char * l) {
 }
 
 const char * AqlNode::getLocation(void) const {
-	return location.c_str();
+	return static_cast<const char *>(location.c_str());
 }
 
 void AqlNode::addChildNode(AqlNode * node) {
@@ -47,8 +45,16 @@ void AqlNode::setLeftNode(AqlNode * node) {
 	this->leftNode = node;	
 }
 
-AqlNode * AqlNode::getLeftNode(void) {
+AqlNode * AqlNode::getLeftNode(void) const {
 	return this->leftNode;
+}
+
+const std::string AqlNode::emitString(void) const {
+	return static_cast<const std::string>(std::string("AqlNode"));
+}
+
+std::vector<AqlNode*> AqlNode::getChildNodes(void) const {
+	return *this->childNodes;
 }
 
 } // namespace

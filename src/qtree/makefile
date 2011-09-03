@@ -10,4 +10,4 @@ clean:
 	del *.gch
 
 tester:
-	$(CC) AqlNode.cpp tester.cpp -o tester.exe
+	$(CC) AqlNode.cpp TreeWalker.cpp StringNode.cpp tester.cpp -o tester.exe

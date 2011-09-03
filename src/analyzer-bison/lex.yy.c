@@ -415,9 +415,9 @@ int yy_flex_debug = 1;
 
 static yyconst short int yy_rule_linenum[23] =
     {   0,
-       31,   32,   34,   35,   36,   38,   43,   52,   61,   70,
-       71,   72,   73,   74,   75,   76,   77,   78,   79,   80,
-       82,   84
+       27,   28,   30,   31,   32,   34,   39,   44,   49,   54,
+       55,   56,   57,   58,   59,   60,   61,   62,   63,   64,
+       66,   68
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -436,10 +436,6 @@ char *yytext;
 #include <string.h>
 #include <iostream>
 #include "..\qtree\AqlNode.h"
-#include "..\qtree\FunctionNode.h"
-#include "..\qtree\ColumnNode.h"
-#include "..\qtree\IntegerNode.h"
-#include "..\qtree\FloatNode.h"
 #include "aql-driver.h"
 #include "aql-parser.tab.hh"
 
@@ -447,9 +443,9 @@ char *yytext;
 #define yywrap() 1
 #define yyterminate() return token::END;
 #define YY_NO_UNPUT 1
-#line 22 "aql-scanner.fl"
+#line 18 "aql-scanner.fl"
 #define YY_USER_ACTION yylloc->columns(yyleng);
-#line 453 "lex.yy.c"
+#line 449 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -600,14 +596,14 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 25 "aql-scanner.fl"
+#line 21 "aql-scanner.fl"
 
 
 
 	typedef AQL::aql_parser::token token;
 
 
-#line 611 "lex.yy.c"
+#line 607 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -703,144 +699,132 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 31 "aql-scanner.fl"
+#line 27 "aql-scanner.fl"
 return token::Q_BEGIN;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 32 "aql-scanner.fl"
+#line 28 "aql-scanner.fl"
 return token::Q_END;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 34 "aql-scanner.fl"
+#line 30 "aql-scanner.fl"
 return token::FROM_BEGIN;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 35 "aql-scanner.fl"
+#line 31 "aql-scanner.fl"
 return token::WHERE_BEGIN;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 36 "aql-scanner.fl"
+#line 32 "aql-scanner.fl"
 return token::SELECT_BEGIN;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 38 "aql-scanner.fl"
+#line 34 "aql-scanner.fl"
 {
-					yylval->identifierName = yytext;
+					yylval->identifierName = strdup(yytext);
 					return token::IDENTIFIER;
 				}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 43 "aql-scanner.fl"
+#line 39 "aql-scanner.fl"
 {
-					char * cpyLitValue;
-					cpyLitValue = (char *) malloc(sizeof(yytext));
-					strcpy(cpyLitValue, yytext);
-					yylval->aqlNode = new AQL::IntegerNode();
-					free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::INTEGER;
 				}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 52 "aql-scanner.fl"
+#line 44 "aql-scanner.fl"
 {
-					char * cpyLitValue;
-					cpyLitValue = (char *) malloc(yyleng);
-					strcpy(cpyLitValue, yytext);
-					yylval->aqlNode = new AQL::FloatNode();
-					free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::FLOAT;
 				}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 61 "aql-scanner.fl"
+#line 49 "aql-scanner.fl"
 {
-					char * cpyLitValue;					
-					cpyLitValue = (char *) malloc(yyleng - 2);
-					strncpy(cpyLitValue, yytext+1, yyleng);
-					yylval->aqlNode = new AQL::StringNode();
-                                        free(cpyLitValue);
+					yylval->literalValue = strdup(yytext);
 					return token::STRING;
 				}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 70 "aql-scanner.fl"
+#line 54 "aql-scanner.fl"
 return token::MEMBER_PTR;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 71 "aql-scanner.fl"
+#line 55 "aql-scanner.fl"
 return token::EQ;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 72 "aql-scanner.fl"
+#line 56 "aql-scanner.fl"
 return token::NE;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 73 "aql-scanner.fl"
+#line 57 "aql-scanner.fl"
 return token::NE;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 74 "aql-scanner.fl"
+#line 58 "aql-scanner.fl"
 return token::GT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 75 "aql-scanner.fl"
+#line 59 "aql-scanner.fl"
 return token::LT;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 76 "aql-scanner.fl"
+#line 60 "aql-scanner.fl"
 return token::GE;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 77 "aql-scanner.fl"
+#line 61 "aql-scanner.fl"
 return token::LT;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 78 "aql-scanner.fl"
+#line 62 "aql-scanner.fl"
 return token::NOT;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 79 "aql-scanner.fl"
+#line 63 "aql-scanner.fl"
 return token::AND;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 80 "aql-scanner.fl"
+#line 64 "aql-scanner.fl"
 return token::OR;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 82 "aql-scanner.fl"
+#line 66 "aql-scanner.fl"
 /* nao devolve espacos em branco */
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 84 "aql-scanner.fl"
+#line 68 "aql-scanner.fl"
 driver.error(*yylloc, "Caracter Invalido");
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 86 "aql-scanner.fl"
+#line 70 "aql-scanner.fl"
 ECHO;
 	YY_BREAK
-#line 844 "lex.yy.c"
+#line 828 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1727,7 +1711,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 86 "aql-scanner.fl"
+#line 70 "aql-scanner.fl"
 
 
 void AQL::aql_driver::scan_begin() {

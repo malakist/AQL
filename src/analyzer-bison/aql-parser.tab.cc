@@ -50,7 +50,7 @@
 /* Unqualified %code blocks.  */
 
 /* Line 318 of lalr1.cc  */
-#line 38 "aql-parser.yy"
+#line 41 "aql-parser.yy"
 
 #include "aql-driver.h"
 
@@ -302,7 +302,7 @@ namespace AQL {
     /* User initialization code.  */
     
 /* Line 553 of lalr1.cc  */
-#line 33 "aql-parser.yy"
+#line 36 "aql-parser.yy"
 {
 	yylloc.begin.filename = yylloc.end.filename = &driver.file;
 }
@@ -427,21 +427,26 @@ namespace AQL {
 	  case 2:
 
 /* Line 678 of lalr1.cc  */
-#line 89 "aql-parser.yy"
+#line 93 "aql-parser.yy"
     { 
-							(yyval.aqlNode) = new AQL::AqlQueryNode();
+							(yyval.aqlNode) = new AQL::QueryNode();
 							(yyval.aqlNode)->addChildNode((yysemantic_stack_[(5) - (2)].aqlNode));
 							(yyval.aqlNode)->addChildNode((yysemantic_stack_[(5) - (3)].aqlNode));
 							(yyval.aqlNode)->addChildNode((yysemantic_stack_[(5) - (4)].aqlNode));
+							
+							std::cout << "\n\nPreparando emissao da string...\n\n";
+							
+							AQL::TreeWalker * walker = new AQL::TreeWalker((yyval.aqlNode));
+							walker->PerformEmitString();
 						}
     break;
 
   case 3:
 
 /* Line 678 of lalr1.cc  */
-#line 96 "aql-parser.yy"
+#line 105 "aql-parser.yy"
     { 
-							(yyval.aqlNode) = new AQL::AqlQueryNode();
+							(yyval.aqlNode) = new AQL::QueryNode();
 							(yyval.aqlNode)->addChildNode((yysemantic_stack_[(4) - (2)].aqlNode));
 							(yyval.aqlNode)->addChildNode((yysemantic_stack_[(4) - (3)].aqlNode));
 						}
@@ -450,7 +455,7 @@ namespace AQL {
   case 4:
 
 /* Line 678 of lalr1.cc  */
-#line 104 "aql-parser.yy"
+#line 113 "aql-parser.yy"
     { 
 							(yyval.aqlNode) = new AQL::FromClauseNode(); 
 							AQL::AqlNode * node = (yysemantic_stack_[(2) - (2)].aqlNode);
@@ -464,14 +469,14 @@ namespace AQL {
   case 5:
 
 /* Line 678 of lalr1.cc  */
-#line 115 "aql-parser.yy"
+#line 124 "aql-parser.yy"
     { (yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode); }
     break;
 
   case 6:
 
 /* Line 678 of lalr1.cc  */
-#line 117 "aql-parser.yy"
+#line 126 "aql-parser.yy"
     { (yysemantic_stack_[(3) - (1)].aqlNode)->setRightNode((yysemantic_stack_[(3) - (3)].aqlNode)); 
 						  (yyval.aqlNode) = (yysemantic_stack_[(3) - (3)].aqlNode); }
     break;
@@ -479,7 +484,7 @@ namespace AQL {
   case 7:
 
 /* Line 678 of lalr1.cc  */
-#line 122 "aql-parser.yy"
+#line 131 "aql-parser.yy"
     { 
 							AQL::TableNode * node = new AQL::TableNode();
 							node->setTableName((yysemantic_stack_[(1) - (1)].identifierName));
@@ -490,98 +495,98 @@ namespace AQL {
   case 8:
 
 /* Line 678 of lalr1.cc  */
-#line 129 "aql-parser.yy"
+#line 138 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::WhereNode(); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(2) - (2)].aqlNode)); }
     break;
 
   case 9:
 
 /* Line 678 of lalr1.cc  */
-#line 133 "aql-parser.yy"
+#line 142 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::PredicateNode(); (yyval.aqlNode)->setRightNode((yysemantic_stack_[(1) - (1)].aqlNode)); (yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode);}
     break;
 
   case 10:
 
 /* Line 678 of lalr1.cc  */
-#line 135 "aql-parser.yy"
+#line 144 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalConnectorNode(AQL::LogicalConnectorTypes::NOT); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(2) - (1)].aqlNode)); }
     break;
 
   case 11:
 
 /* Line 678 of lalr1.cc  */
-#line 137 "aql-parser.yy"
+#line 146 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalConnectorNode(AQL::LogicalConnectorTypes::AND); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 12:
 
 /* Line 678 of lalr1.cc  */
-#line 139 "aql-parser.yy"
+#line 148 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalConnectorNode(AQL::LogicalConnectorTypes::OR); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 13:
 
 /* Line 678 of lalr1.cc  */
-#line 142 "aql-parser.yy"
+#line 151 "aql-parser.yy"
     { (yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode); }
     break;
 
   case 14:
 
 /* Line 678 of lalr1.cc  */
-#line 143 "aql-parser.yy"
+#line 152 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::EQ); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 15:
 
 /* Line 678 of lalr1.cc  */
-#line 144 "aql-parser.yy"
+#line 153 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::NE); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 16:
 
 /* Line 678 of lalr1.cc  */
-#line 145 "aql-parser.yy"
+#line 154 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::GT); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 17:
 
 /* Line 678 of lalr1.cc  */
-#line 146 "aql-parser.yy"
+#line 155 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::LT); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 18:
 
 /* Line 678 of lalr1.cc  */
-#line 147 "aql-parser.yy"
+#line 156 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::GE); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 19:
 
 /* Line 678 of lalr1.cc  */
-#line 148 "aql-parser.yy"
+#line 157 "aql-parser.yy"
     { (yyval.aqlNode) = new AQL::LogicalCompNode(AQL::Operator::LE); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (1)].aqlNode)); (yyval.aqlNode)->addChildNode((yysemantic_stack_[(3) - (3)].aqlNode)); }
     break;
 
   case 20:
 
 /* Line 678 of lalr1.cc  */
-#line 152 "aql-parser.yy"
+#line 161 "aql-parser.yy"
     { 	(yyval.aqlNode) = new AQL::SelectNode();  }
     break;
 
   case 21:
 
 /* Line 678 of lalr1.cc  */
-#line 154 "aql-parser.yy"
+#line 163 "aql-parser.yy"
     { 
 							(yyval.aqlNode) = new AQL::SelectNode();
 							AQL::AqlNode * node = (yysemantic_stack_[(2) - (2)].aqlNode);
@@ -595,16 +600,16 @@ namespace AQL {
   case 22:
 
 /* Line 678 of lalr1.cc  */
-#line 165 "aql-parser.yy"
+#line 174 "aql-parser.yy"
     {
-							(yyval.aqlNode) = new AQL::MembersNode(); (yyval.aqlNode)->setRightNode((yysemantic_stack_[(1) - (1)].aqlNode)); (yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode);
+							(yyval.aqlNode) = (yysemantic_stack_[(1) - (1)].aqlNode);
 						}
     break;
 
   case 23:
 
 /* Line 678 of lalr1.cc  */
-#line 169 "aql-parser.yy"
+#line 178 "aql-parser.yy"
     {
 							(yysemantic_stack_[(3) - (1)].aqlNode)->setRightNode((yysemantic_stack_[(3) - (3)].aqlNode));
 							(yyval.aqlNode) = (yysemantic_stack_[(3) - (3)].aqlNode);
@@ -614,7 +619,7 @@ namespace AQL {
   case 24:
 
 /* Line 678 of lalr1.cc  */
-#line 176 "aql-parser.yy"
+#line 185 "aql-parser.yy"
     {
 							AQL::ColumnNode * node = new AQL::ColumnNode();
 							node->setTableName((yysemantic_stack_[(3) - (1)].identifierName));
@@ -626,7 +631,7 @@ namespace AQL {
   case 25:
 
 /* Line 678 of lalr1.cc  */
-#line 183 "aql-parser.yy"
+#line 192 "aql-parser.yy"
     {
 							AQL::FunctionNode * node = new AQL::FunctionNode(); 
 							node->setFunctionName((yysemantic_stack_[(4) - (1)].identifierName));
@@ -638,14 +643,35 @@ namespace AQL {
   case 26:
 
 /* Line 678 of lalr1.cc  */
-#line 189 "aql-parser.yy"
+#line 198 "aql-parser.yy"
     { (yyval.aqlNode) = (yysemantic_stack_[(3) - (2)].aqlNode); }
+    break;
+
+  case 27:
+
+/* Line 678 of lalr1.cc  */
+#line 199 "aql-parser.yy"
+    { (yyval.aqlNode) = new AQL::IntegerNode((yysemantic_stack_[(1) - (1)].literalValue)); }
+    break;
+
+  case 28:
+
+/* Line 678 of lalr1.cc  */
+#line 200 "aql-parser.yy"
+    { (yyval.aqlNode) = new AQL::FloatNode((yysemantic_stack_[(1) - (1)].literalValue)); }
+    break;
+
+  case 29:
+
+/* Line 678 of lalr1.cc  */
+#line 201 "aql-parser.yy"
+    { (yyval.aqlNode) = new AQL::StringNode((yysemantic_stack_[(1) - (1)].literalValue)); }
     break;
 
 
 
 /* Line 678 of lalr1.cc  */
-#line 649 "aql-parser.tab.cc"
+#line 675 "aql-parser.tab.cc"
 	default:
           break;
       }
@@ -1007,9 +1033,9 @@ namespace AQL {
   const unsigned char
   aql_parser::yyrline_[] =
   {
-         0,    88,    88,    95,   103,   114,   116,   121,   129,   132,
-     134,   136,   138,   142,   143,   144,   145,   146,   147,   148,
-     151,   153,   164,   168,   175,   182,   189,   190,   191,   192
+         0,    92,    92,   104,   112,   123,   125,   130,   138,   141,
+     143,   145,   147,   151,   152,   153,   154,   155,   156,   157,
+     160,   162,   173,   177,   184,   191,   198,   199,   200,   201
   };
 
   // Print the state stack on the debug stream.
@@ -1102,11 +1128,11 @@ namespace AQL {
 } // AQL
 
 /* Line 1054 of lalr1.cc  */
-#line 1106 "aql-parser.tab.cc"
+#line 1132 "aql-parser.tab.cc"
 
 
 /* Line 1056 of lalr1.cc  */
-#line 195 "aql-parser.yy"
+#line 204 "aql-parser.yy"
 
 void AQL::aql_parser::error(const AQL::aql_parser::location_type& l, const std::string& m) {
 	driver.error(l, m);

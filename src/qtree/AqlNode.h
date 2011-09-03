@@ -13,7 +13,7 @@ private:
 	AqlNode * rightNode;
 	AqlNode * leftNode;
 protected:
-	AqlNode * getNodeAtPosition(const int position) const;
+	const AqlNode * getNodeAtPosition(const int position) const;
 	std::size_t getChildCount(void) const;
 	std::string location;
 public:			
@@ -24,8 +24,9 @@ public:
 	void addChildNode(AqlNode *);
 	void setRightNode(AqlNode *);
 	void setLeftNode(AqlNode *);
-	AqlNode * getLeftNode(void);
-	
+	AqlNode * getLeftNode(void) const;
+	virtual const std::string emitString() const;
+	std::vector<AqlNode*> getChildNodes(void) const;
 };
 
 } 

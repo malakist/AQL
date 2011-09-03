@@ -9,13 +9,17 @@
 #define STRINGNODE_H_
 
 #include "AqlNode.h"
+#include <string>
 
 namespace AQL {
 
 class StringNode : public AQL::AqlNode {
+private:
+	std::string _nodeValue;
 public:
-	StringNode();
+	explicit StringNode(const char * nodeValue) { this->_nodeValue = std::string(nodeValue); }
 	virtual ~StringNode();
+	const std::string emitString() const;
 };
 
 } //namespace
