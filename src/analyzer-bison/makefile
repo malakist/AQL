@@ -16,3 +16,4 @@ clean:
 	del location.hh
 	del position.hh
 	del stack.hh
+	del *.exe
