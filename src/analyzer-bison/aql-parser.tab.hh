@@ -49,6 +49,14 @@
 #include "..\qtree\ColumnNode.h"
 #include "..\qtree\MembersNode.h"
 #include "..\qtree\SelectNode.h"
+#include "..\qtree\PredicateNode.h"
+#include "..\qtree\LogicalCompNode.h"
+#include "..\qtree\LogicalConnectorNode.h"
+#include "..\qtree\WhereNode.h"
+#include "..\qtree\TableNode.h"
+#include "..\qtree\FromClauseNode.h"
+#include "..\qtree\AqlQueryNode.h"
+
 
 //#define YYSTYPE const char *
 
@@ -59,7 +67,7 @@ namespace AQL {
 
 
 /* Line 35 of lalr1.cc  */
-#line 63 "aql-parser.tab.hh"
+#line 71 "aql-parser.tab.hh"
 
 
 #include <string>
@@ -72,7 +80,7 @@ namespace AQL {
 namespace AQL {
 
 /* Line 35 of lalr1.cc  */
-#line 76 "aql-parser.tab.hh"
+#line 84 "aql-parser.tab.hh"
   class position;
   class location;
 
@@ -81,7 +89,7 @@ namespace AQL {
 } // AQL
 
 /* Line 35 of lalr1.cc  */
-#line 85 "aql-parser.tab.hh"
+#line 93 "aql-parser.tab.hh"
 
 #include "location.hh"
 
@@ -128,7 +136,7 @@ do {							\
 namespace AQL {
 
 /* Line 35 of lalr1.cc  */
-#line 132 "aql-parser.tab.hh"
+#line 140 "aql-parser.tab.hh"
 
   /// A Bison parser.
   class aql_parser
@@ -140,7 +148,7 @@ namespace AQL {
     {
 
 /* Line 35 of lalr1.cc  */
-#line 55 "aql-parser.yy"
+#line 63 "aql-parser.yy"
 
 	AQL::AqlNode *aqlNode;
 	char * identifierName;
@@ -148,7 +156,7 @@ namespace AQL {
 
 
 /* Line 35 of lalr1.cc  */
-#line 152 "aql-parser.tab.hh"
+#line 160 "aql-parser.tab.hh"
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -355,7 +363,7 @@ namespace AQL {
 } // AQL
 
 /* Line 35 of lalr1.cc  */
-#line 359 "aql-parser.tab.hh"
+#line 367 "aql-parser.tab.hh"
 
 
 

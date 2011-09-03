@@ -8,3 +8,6 @@ clean:
 	del *.o
 	del *.exe
 	del *.gch
+
+tester:
+	$(CC) AqlNode.cpp tester.cpp -o tester.exe
