@@ -1,6 +1,7 @@
 #include "TreeWalker.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
 namespace AQL {
 

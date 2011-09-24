@@ -1,13 +1,24 @@
+.PHONY: clean
+
 CC=g++
-CC_ARGS=-c
 
-all: clean
-	$(CC) AqlNode.cpp StringNode.cpp $(CC_ARGS)
+COMPILE=$(CC) -c
+LINK=$(CC)
 
+BUILDDIR=../build/
+
+OBJECTS=$(BUILDDIR)AqlNode.o $(BUILDDIR)StringNode.o
+
+all:  $(BUILDDIR)ensure-build-dir $(OBJECTS)
+
+$(BUILDDIR)ensure-build-dir:
+	@echo "Criando o diretorio $(BUILDDIR)"
+	mkdir -p $(BUILDDIR)
+	touch $(BUILDDIR)ensure-build-dir
+
+$(BUILDDIR)%.o: %.cpp
+	$(COMPILE) $< -o $@
+	
 clean:
-	del *.o
-	del *.exe
-	del *.gch
-
-tester:
-	$(CC) AqlNode.cpp TreeWalker.cpp StringNode.cpp tester.cpp -o tester.exe
+	rm $(BUILDDIR)*
+	rmdir $(BUILDDIR)

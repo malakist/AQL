@@ -2,6 +2,7 @@
 #define LOGICALCOMPNODE_H
 
 #include "AqlNode.h"
+#include <string>
 
 namespace AQL {
 
@@ -37,6 +38,7 @@ public:
 			case Operator::LT: return result + "LT";
 			case Operator::GE: return result + "GE";
 			case Operator::LE: return result + "LE";
+			default: return result;
 		}
 	}
 };

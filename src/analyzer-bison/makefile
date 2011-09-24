@@ -1,19 +1,57 @@
-CC=g++
-BISON=C:\gnuwin32\bin\bison.exe
-FLEX=C:\gnuwin32\bin\flex.exe
+CXXFLAGS?=
 
-all: flex
-	$(CC) aql-driver.cpp aql-parser.tab.cc lex.yy.c aqlc.cpp ..\qtree\AqlNode.cpp ..\qtree\StringNode.cpp ..\qtree\TreeWalker.cpp -o aqlc.exe
+ifeq ($(DEBUG),y)
+CXXFLAGS+=-D_DEBUG
+endif
 
-bison: clean
-	$(BISON) aql-parser.yy
+CXX?=g++
+LD=$(CXX)
+BISON?=bison
+FLEX?=flex
+BUILDDIR?=../build/
+
+LFLAGS=$(CXXFLAGS)
+FLEXFLAGS=
+BISONFLAGS=
+
+COMPILE=$(CXX) $(CXXFLAGS) -c
+LINK=$(LD) $(LFLAGS)
+
+OBJECTS=$(BUILDDIR)aql-parser.tab.o $(BUILDDIR)lex.yy.o $(BUILDDIR)aql-driver.o $(BUILDDIR)aqlc.o
+
+.SILENT:
+.PHONY: clean
 	
-flex: bison
-	$(FLEX) aql-scanner.fl
+all: $(OBJECTS)
 	
+aql-parser.tab.cc: aql-parser.yy
+	@echo "	BISON	$<"
+	$(BISON) $(BISONFLAGS) -d -o$@ $<
+	
+lex.yy.c: aql-parser.tab.cc aql-scanner.fl
+	@echo "	FLEX	aql-scanner.fl"
+	$(FLEX) $(FLEXFLAGS) -o $@ aql-scanner.fl
+	
+$(BUILDDIR)aql-parser.tab.o: aql-parser.tab.cc
+	@echo "	CXX	$<"
+	$(COMPILE) $< -o$@
+
+$(BUILDDIR)lex.yy.o: lex.yy.c
+	@echo "	CXX	$<"
+	$(COMPILE) $< -o$@
+	
+$(BUILDDIR)aql-driver.o: aql-driver.cpp
+	@echo "	CXX	$<"
+	$(COMPILE) $< -o$@
+	
+$(BUILDDIR)aqlc.o: aqlc.cpp
+	@echo "	CXX	$<"
+	$(COMPILE) $< -o$@
+
 clean:
-	del *.tab.??
-	del location.hh
-	del position.hh
-	del stack.hh
-	del *.exe
+	@echo "	CLEAN"
+	rm lex.yy.c
+	rm *.hh
+	rm *.cc
+	rm $(BUILDDIR)aql-driver.o
+	rm $(BUILDDIR)aqlc.o
