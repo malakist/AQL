@@ -1,5 +1,5 @@
 BUILDDIR=build/
-ANALYZER=analyzer-bison/
+ANALYZER=analyzer/
 QTREE=qtree/
 OBJECTS=$(BUILDDIR)aql-parser.tab.o $(BUILDDIR)lex.yy.o $(BUILDDIR)aql-driver.o $(BUILDDIR)aqlc.o \
 	$(BUILDDIR)AqlNode.o $(BUILDDIR)StringNode.o $(BUILDDIR)TreeWalker.o
