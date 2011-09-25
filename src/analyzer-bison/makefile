@@ -8,7 +8,7 @@ CXX?=g++
 LD=$(CXX)
 BISON?=bison
 FLEX?=flex
-BUILDDIR?=../build/
+BUILDDIR?=build/
 
 LFLAGS=$(CXXFLAGS)
 FLEXFLAGS=
@@ -22,7 +22,12 @@ OBJECTS=$(BUILDDIR)aql-parser.tab.o $(BUILDDIR)lex.yy.o $(BUILDDIR)aql-driver.o 
 .SILENT:
 .PHONY: clean
 	
-all: $(OBJECTS)
+all: $(BUILDDIR)ensure-build-dir $(OBJECTS)
+
+$(BUILDDIR)ensure-build-dir:
+	@echo " BUILDDIR	$(BUILDDIR)"
+	mkdir -p $(BUILDDIR)
+	touch $(BUILDDIR)ensure-build-dir
 	
 aql-parser.tab.cc: aql-parser.yy
 	@echo "	BISON	$<"
@@ -53,5 +58,6 @@ clean:
 	rm lex.yy.c
 	rm *.hh
 	rm *.cc
-	rm $(BUILDDIR)aql-driver.o
-	rm $(BUILDDIR)aqlc.o
+	rm $(OBJECTS)
+	rm $(BUILDDIR)*
+	rmdir $(BUILDDIR)

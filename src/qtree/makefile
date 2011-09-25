@@ -1,3 +1,4 @@
+.SILENT:
 .PHONY: clean
 
 CC=g++
@@ -5,9 +6,9 @@ CC=g++
 COMPILE=$(CC) -c
 LINK=$(CC)
 
-BUILDDIR=../build/
+BUILDDIR=build/
 
-OBJECTS=$(BUILDDIR)AqlNode.o $(BUILDDIR)StringNode.o
+OBJECTS=$(BUILDDIR)AqlNode.o $(BUILDDIR)StringNode.o $(BUILDDIR)TreeWalker.o
 
 all:  $(BUILDDIR)ensure-build-dir $(OBJECTS)
 
@@ -17,6 +18,7 @@ $(BUILDDIR)ensure-build-dir:
 	touch $(BUILDDIR)ensure-build-dir
 
 $(BUILDDIR)%.o: %.cpp
+	@echo " CXX	$<"
 	$(COMPILE) $< -o $@
 	
 clean:
