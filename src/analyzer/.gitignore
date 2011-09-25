@@ -1,0 +1,7 @@
+*.o
+*.exe
+aql-parser.tab.*
+lex.yy.c
+location.hh
+position.hh
+stack.hh
