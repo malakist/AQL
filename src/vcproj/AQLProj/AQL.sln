@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QTree", "AQLProj.vcproj", "{194BF116-013D-4ECA-B8E5-FB5722CB2DB2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Analyzer", "..\Analyzer\Analyzer.vcproj", "{2A06907B-CB2F-45D1-B7E5-8B7CE56ABBF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{194BF116-013D-4ECA-B8E5-FB5722CB2DB2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{194BF116-013D-4ECA-B8E5-FB5722CB2DB2}.Debug|Win32.Build.0 = Debug|Win32
+		{194BF116-013D-4ECA-B8E5-FB5722CB2DB2}.Release|Win32.ActiveCfg = Release|Win32
+		{194BF116-013D-4ECA-B8E5-FB5722CB2DB2}.Release|Win32.Build.0 = Release|Win32
+		{2A06907B-CB2F-45D1-B7E5-8B7CE56ABBF9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A06907B-CB2F-45D1-B7E5-8B7CE56ABBF9}.Debug|Win32.Build.0 = Debug|Win32
+		{2A06907B-CB2F-45D1-B7E5-8B7CE56ABBF9}.Release|Win32.ActiveCfg = Release|Win32
+		{2A06907B-CB2F-45D1-B7E5-8B7CE56ABBF9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
