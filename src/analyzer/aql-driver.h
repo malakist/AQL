@@ -41,7 +41,9 @@ public:
 	void error(const std::string& m);
 	
 	void setCurrentLocation(const AQL::location& l);
-	std::string * getLocationString(void) const;
+	std::string * getLocationString(void) const;*/
+
+	inline std::ostream 
 };
 
 } //namespace AQL

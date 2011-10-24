@@ -12,6 +12,10 @@ AqlNode::AqlNode() : childCount(0), location("") {
 	this->rightNode = (AqlNode *) 0;
 }
 
+AqlNode::AqlNode(AqlNode& rhs) { }
+
+AqlNode& AqlNode::operator =(AqlNode& rhs) { }
+
 AqlNode::~AqlNode(void) {
 	delete this->childNodes;
 }

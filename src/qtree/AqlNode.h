@@ -21,6 +21,8 @@ private:
 	std::vector<AqlNode*> *childNodes;
 	AqlNode * rightNode;
 	AqlNode * leftNode;
+	AqlNode(AqlNode& rhs);
+	AqlNode& operator=(AqlNode& rhs);
 protected:
 	const AqlNode * getNodeAtPosition(const int position) const;
 	std::size_t getChildCount(void) const;
