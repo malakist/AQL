@@ -41,9 +41,17 @@ public:
 	void error(const std::string& m);
 	
 	void setCurrentLocation(const AQL::location& l);
-	std::string * getLocationString(void) const;*/
 
-	inline std::ostream 
+	template<typename NodeT>
+	NodeT* createPositionedNode(void) const {
+		NodeT* node = new NodeT;
+		/*std::string locationText(currentFileName);
+		std::stringstream strStream(locationText);
+		strStream << currentLine << ", " << currentColumn;;
+		node->setLocationText(locationText.c_str());*/
+		node->setLocationText("teste");
+		return node;
+	}
 };
 
 } //namespace AQL

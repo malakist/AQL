@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <sstream>
 #include "..\qtree\AqlNode.h"
 #include "aql-driver.h"
 #include "aql-parser.tab.hh"

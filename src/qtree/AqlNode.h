@@ -23,6 +23,7 @@ private:
 	AqlNode * leftNode;
 	AqlNode(AqlNode& rhs);
 	AqlNode& operator=(AqlNode& rhs);
+	std::string _nodeValue;
 protected:
 	const AqlNode * getNodeAtPosition(const int position) const;
 	std::size_t getChildCount(void) const;
@@ -30,8 +31,10 @@ protected:
 public:			
 	explicit AqlNode();
 	virtual ~AqlNode();
-	void setLocation(const char *);
+	void setLocationText(const char *);
 	const char * getLocation(void) const;
+	void setNodeValue(const std::string&);
+	void setNodeValue(const char *);
 	void addChildNode(AqlNode *);
 	void setRightNode(AqlNode *);
 	void setLeftNode(AqlNode *);
@@ -83,6 +86,7 @@ private:
 	std::string _nodeValue;
 public:
 	explicit IntegerNode(const char * nodeValue) { this->_nodeValue = std::string(nodeValue); }
+	explicit IntegerNode(void) {}
 	const int ReturnInteger() { 
 		int value;
 		if (from_string<int>(value, _nodeValue, std::dec)) {
@@ -91,7 +95,7 @@ public:
 			return 0;
 		}
 	}
-	const std::string emitString() const { return this->_nodeValue; }
+	const std::string emitString() const { return std::string("IntegerNode") /*this->_nodeValue*/; }
 };
 
 class Comparison {

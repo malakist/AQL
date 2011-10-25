@@ -28,12 +28,20 @@ std::size_t AqlNode::getChildCount(void) const {
 	return this->childNodes->size();
 }
 
-void AqlNode::setLocation(const char * l) {
+void AqlNode::setLocationText(const char * l) {
 	location = std::string(l);
 }
 
 const char * AqlNode::getLocation(void) const {
 	return static_cast<const char *>(location.c_str());
+}
+
+void AqlNode::setNodeValue(const std::string& value) {
+	this->_nodeValue = value;
+}
+
+void AqlNode::setNodeValue(const char * value) {
+	setNodeValue(std::string(value));
 }
 
 void AqlNode::addChildNode(AqlNode * node) {

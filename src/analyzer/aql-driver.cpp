@@ -38,14 +38,15 @@ AQL::aql_driver::setCurrentLocation(const AQL::location& l) {
 		currentLine = l.end.line;
 		currentColumn = l.end.column;
 	}
-	std::cout << "Localizacao: " << *(this->getLocationString()) << std::endl;
 }
 
-std::string * 
-AQL::aql_driver::getLocationString(void) const {		
-	std::string* res = this->currentFileName;
-	std::string cont = *res;
-	cont.append(": ");
-	std::cout << "getLocationString: " << *res << std::endl;
-	return res;
+template<typename NodeT>
+NodeT* AQL::aql_driver::createPositionedNode(void) const {
+	NodeT* node = new NodeT;
+	std::string locationText(currentFileName);
+	locationText.append(currentLine);
+	locationText.append(", ");
+	locationText.append(currentColumn);
+	node->setLocationText(locationText.c_str);
+	return node;
 }
