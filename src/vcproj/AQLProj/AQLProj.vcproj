@@ -187,66 +187,6 @@
 				RelativePath="..\..\qtree\AqlNode.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\qtree\ColumnNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\FloatNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\FromClauseNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\FunctionNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\IntegerNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\LogicalCompNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\LogicalConnectorNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\MembersNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\PredicateNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\QueryNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\SelectNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\StringNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\TableNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\TreeWalker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\qtree\WhereNode.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

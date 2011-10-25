@@ -42,11 +42,5 @@ AQL::aql_driver::setCurrentLocation(const AQL::location& l) {
 
 template<typename NodeT>
 NodeT* AQL::aql_driver::createPositionedNode(void) const {
-	NodeT* node = new NodeT;
-	std::string locationText(currentFileName);
-	locationText.append(currentLine);
-	locationText.append(", ");
-	locationText.append(currentColumn);
-	node->setLocationText(locationText.c_str);
-	return node;
+	
 }
