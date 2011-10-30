@@ -1,6 +1,8 @@
 #ifndef FILEMESSAGE_H
 #define FILEMESSAGE_H
 
+#include <string>
+
 class FileMessage
 {
 public:
