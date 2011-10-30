@@ -166,6 +166,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FileManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FileMessage.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\qtree\StringNode.cpp"
 				>
 			</File>
@@ -185,6 +193,14 @@
 			>
 			<File
 				RelativePath="..\..\qtree\AqlNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileMessage.h"
 				>
 			</File>
 		</Filter>
